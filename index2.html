@@ -22,21 +22,14 @@
             height: 100vh;
         }
         .container {
-            display: flex;
-            justify-content: space-between;
-            max-width: 1200px;
-            width: 100%;
-            gap: 20px;
-        }
-        .form-container {
             background-color: #fff;
-            flex: 1;
-            padding: 20px;
+            max-width: 500px;
+            margin: 150px auto; /* Margen superior incrementado */
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
         }
-        .form-container h1 {
+        h1 {
             text-align: center;
             margin-bottom: 20px;
             color: #007bff;
@@ -50,153 +43,161 @@
             display: inline-block;
             font-weight: bold;
             text-align: center;
+            width: 100%;
             margin-bottom: 10px;
             transition: background-color 0.3s, transform 0.2s;
             border: none;
             cursor: pointer;
-            width: 100%;
         }
         .button:hover {
             background-color: #0056b3;
             transform: scale(1.05);
         }
         .button i {
-            margin-right: 5px;
+            margin-right: 5px; /* Espacio entre el icono y el texto */
         }
         fieldset {
-            margin-bottom: 15px;
-            border: none;
+            margin-bottom: 10px;
         }
         select,
         input[type="text"] {
             width: 100%;
             padding: 10px;
+            margin-bottom: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
         }
-        table {
-            width: 100%;
-            margin-bottom: 20px;
-            border-collapse: collapse;
-        }
-        table td {
-            padding: 10px;
-        }
-        .row {
+        .form-row {
             display: flex;
             justify-content: space-between;
             gap: 10px;
-            flex-wrap: wrap;
+            margin-bottom: 10px;
         }
-        .row .button {
-            flex: 1 1 calc(33.33% - 10px);
+        .form-row .form-group {
+            flex: 1;
+            min-width: 0; /* Ensure content fits in the flex item */
+        }
+        .form-row .form-group:nth-child(2) {
+            margin-left: 10px;
+        }
+        table.default {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        table.default td {
+            padding: 5px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="form-container">
-            <h1>Formulario 1</h1>
-            <form id="reporteForm1" autocomplete="off">
-                <fieldset>
-                    <input id="field_1" name="field_11" placeholder="Nombre:" minlength="5" maxlength="40" type="text" tabindex="1" onkeyup="this.value=this.value.toUpperCase();" title="Letras y números. Tamaño mínimo: 5. Tamaño máximo: 40" autofocus>
-                </fieldset>
-                <fieldset>
-                    <input id="field_22" name="field_22" placeholder="DNI:" type="text" tabindex="2" maxlength="9" minlength="2" onkeyup="this.value=this.value.toUpperCase();" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" required>
-                </fieldset>
-                <table>
-                    <tr>
-                        <td>Auricular</td>
-                        <td>
-                            <select id="field_33" name="field_33" tabindex="3">
-                                <option value="">Selecciona opción</option>
-                                <option value="Plantronics C3220USB">Plantronics C3220USB</option>
-                                <option value="Accutone ZE-UB210">Accutone ZE-UB210</option>
-                                <option value="Plantronics Centralita">Plantronics Centralita</option>
-                                <option value="Auricular Otros">Auricular Otros</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-                <table>
-                    <tr>
-                        <td>Portátil</td>
-                        <td>
-                            <select id="field_44" name="field_44" tabindex="4">
-                                <option value="">Selecciona opción</option>
-                                <option value="HP 250 G7">HP 250 G7</option>
-                                <option value="HP 255 G7">HP 255 G7</option>
-                                <option value="HP 440 G5">HP 440 G5</option>
-                                <option value="HP 445R G6">HP 445R G6</option>
-                                <option value="HP 455 G7">HP 455 G7</option>
-                                <option value="DELL 3410">DELL 3410</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-                <fieldset>
-                    <input id="field_4" name="field_34" placeholder="Serial o Código:" type="text" tabindex="5" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
-                </fieldset>
-                <fieldset>
-                    <input id="field_3" name="field_36" placeholder="Equipamiento entregado:" type="text" tabindex="6" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
-                </fieldset>
-                <fieldset>
-                    <input id="field_3_2" name="field_35" placeholder="Equipamiento entregado 2:" type="text" tabindex="7" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
-                </fieldset>
-                <div class="row">
-                    <a href="#" class="button" onclick="generatePDF('reporteForm1')"><i class="fas fa-download"></i> Descargar PDF</a>
-                    <button type="reset" class="button"><i class="fas fa-eraser"></i> Borrar</button>
-                    <a href="index.html" class="button"><i class="fas fa-home"></i> Inicio</a>
+    <!-- Inicio content -->  
+    <div class="container"> 
+        <center>
+            <h1 class="mt-5">SISTEMA DE ENTREGA Y RECEPCIÓN DE MATERIAL</h1>
+        </center>
+        <form id="reporteForm" autocomplete="off">
+            <div class="form-row">
+                <div class="form-group">
+                    <fieldset>
+                        <input id="field_1" name="field_11" placeholder="Nombre:" size="20" minlength="5" maxlength="40" type="text" tabindex="1" onkeyup="this.value=this.value.toUpperCase();" title="Letras y números. Tamaño mínimo: 5. Tamaño máximo: 40" autofocus>
+                    </fieldset>
                 </div>
-            </form>
-        </div>
-
-        <div class="form-container">
-            <h1>Formulario 2</h1>
-            <form id="reporteForm2" autocomplete="off">
-                <!-- Puedes agregar aquí los campos del segundo formulario, si es necesario -->
-                <!-- Ejemplo de un campo: -->
-                <fieldset>
-                    <input id="field_2_1" name="field_21" placeholder="Campo Formulario 2:" type="text">
-                </fieldset>
-                <div class="row">
-                    <a href="#" class="button" onclick="generatePDF('reporteForm2')"><i class="fas fa-download"></i> Descargar PDF</a>
-                    <button type="reset" class="button"><i class="fas fa-eraser"></i> Borrar</button>
-                    <a href="index.html" class="button"><i class="fas fa-home"></i> Inicio</a>
+                <div class="form-group">
+                    <fieldset>
+                        <input id="field_22" name="field_22" placeholder="DNI:" type="text" tabindex="2" maxlength="9" minlength="2" onkeyup="this.value=this.value.toUpperCase();" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" required>
+                    </fieldset>
                 </div>
-            </form>
-        </div>
+            </div>
+            <table class="default">
+                <tr>
+                    <td>Auricular</td>
+                    <td>
+                        <select id="field_33" name="field_33" tabindex="3">
+                            <option value="">Selecciona opción</option>
+                            <option value="Plantronics C3220USB">Plantronics C3220USB</option>
+                            <option value="Accutone ZE-UB210">Accutone ZE-UB210</option>
+                            <option value="Plantronics Centralita">Plantronics Centralita</option>
+                            <option value="Auricular Otros">Auricular Otros</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <table class="default">
+                <tr>
+                    <td>Portátil</td>
+                    <td>
+                        <select id="field_44" name="field_44" tabindex="4">
+                            <option value="">Selecciona opción</option>
+                            <option value="HP 250 G7">HP 250 G7</option>
+                            <option value="HP 255 G7">HP 255 G7</option>
+                            <option value="HP 440 G5">HP 440 G5</option>
+                            <option value="HP 445R G6">HP 445R G6</option>
+                            <option value="HP 455 G7">HP 455 G7</option>
+                            <option value="DELL 3410">DELL 3410</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <fieldset>
+                <input id="field_4" name="field_34" placeholder="Serial o Codigo:" type="text" tabindex="5" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
+            </fieldset>
+            <br>
+            <fieldset>
+                <input id="field_3" name="field_36" placeholder="Equipamiento entregado:" type="text" tabindex="6" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
+            </fieldset>
+            <br>
+            <fieldset>
+                <input id="field_3_2" name="field_35" placeholder="Equipamiento entregado 2:" type="text" tabindex="7" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
+            </fieldset>
+            <br>
+            <div class="button-container">
+                <a href="#" class="button" onclick="generatePDF()"><i class="fas fa-download"></i> Descargar PDF</a>
+                <button type="reset" class="button"><i class="fas fa-eraser"></i> Borrar</button>
+                <a href="index.html" class="button"><i class="fas fa-home"></i> Inicio</a>
+            </div>
+        </form>
     </div>
 
     <!-- jsPDF library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
-        function generatePDF(formId) {
+        function generatePDF() {
             const { jsPDF } = window.jspdf;
-            const form = document.getElementById(formId);
 
             // Get form data
-            const formData = new FormData(form);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
+            const nombre = document.getElementById('field_1').value;
+            const dni = document.getElementById('field_22').value;
+            const auricular = document.getElementById('field_33').value;
+            const portatil = document.getElementById('field_44').value;
+            const serial = document.getElementById('field_4').value;
+            const equipamiento1 = document.getElementById('field_3').value;
+            const equipamiento2 = document.getElementById('field_3_2').value;
 
             const doc = new jsPDF();
+
             doc.setFontSize(12);
             doc.text('Reporte de Entrega y Recepción de Material', 10, 10);
-            Object.keys(data).forEach((key, index) => {
-                doc.text(`${key}: ${data[key]}`, 10, 20 + (index * 10));
-            });
+            doc.text(`Nombre: ${nombre}`, 10, 20);
+            doc.text(`DNI: ${dni}`, 10, 30);
+            doc.text(`Auricular: ${auricular}`, 10, 40);
+            doc.text(`Portátil: ${portatil}`, 10, 50);
+            doc.text(`Serial o Código: ${serial}`, 10, 60);
+            doc.text(`Equipamiento Entregado: ${equipamiento1}`, 10, 70);
+            doc.text(`Equipamiento Entregado 2: ${equipamiento2}`, 10, 80);
 
             doc.save('reporte.pdf');
         }
     </script>
 </body>
 </html>
-
-
 
 
 

@@ -65,6 +65,10 @@
             background-color: #0056b3;
             transform: scale(1.05);
         }
+
+        .button i {
+            margin-right: 5px;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
@@ -179,14 +183,13 @@
         <h3 id="password9"></h3>
         <hr>
         <div class="row">
-            <a href="#" class="button" onclick="displayPasswords()">Generar</a>
-            <a href="#" class="button" onclick="generarPDF()">Descargar PDF</a>
-            <a href="index.html" class="button">Inicio</a>
+            <a href="#" class="button" onclick="displayPasswords()"><i class="fas fa-sync-alt"></i>Generar</a>
+            <a href="#" class="button" onclick="generarPDF()"><i class="fas fa-file-pdf"></i>Descargar PDF</a>
+            <a href="index.html" class="button"><i class="fas fa-home"></i>Inicio</a>
         </div>
     </div>
 </body>
 
 </html>
-
 
 

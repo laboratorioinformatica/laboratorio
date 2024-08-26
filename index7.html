@@ -113,6 +113,40 @@
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(20);
+            doc.text("Sistema de Entrega", 105, 20, null, null, "center");
+
+            doc.setFontSize(16);
+            doc.text("Módulo Préstamos", 105, 30, null, null, "center");
+
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+
+            const fields = ["field_11", "field_02", "field_22", "field_1", "field_2", "field_3", "field_4", "field_44"];
+            let y = 50;
+
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                const label = field.placeholder || field.previousElementSibling.textContent || field.name;
+                const value = field.value || field.options[field.selectedIndex].text;
+                doc.text(`${label}: ${value}`, 20, y);
+                y += 10;
+            });
+
+            doc.save("reporte_prestamos.pdf");
+        }
+
+        function resetForms() {
+            document.getElementById('reporteForm1').reset();
+            document.getElementById('reporteForm2').reset();
+        }
+    </script>
 </head>
 
 <body>
@@ -192,7 +226,7 @@
             <a href="#" class="btn" onclick="generatePDF()">
                 <i class="fas fa-download"></i> Descargar PDF
             </a>
-            <button type="reset" class="btn">
+            <button type="button" class="btn" onclick="resetForms()">
                 <i class="fas fa-eraser"></i> Borrar
             </button>
             <a href="index.html" class="btn">
@@ -201,36 +235,6 @@
         </div>
     </div>
 
-    <script>
-        function generatePDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(20);
-            doc.text("Sistema de Entrega", 105, 20, null, null, "center");
-
-            doc.setFontSize(16);
-            doc.text("Módulo Préstamos", 105, 30, null, null, "center");
-
-            doc.setFontSize(12);
-            doc.setFont("helvetica", "normal");
-
-            const fields = ["field_11", "field_02", "field_22", "field_1", "field_2", "field_3", "field_4", "field_44"];
-            let y = 50;
-
-            fields.forEach(fieldId => {
-                const field = document.getElementById(fieldId);
-                const label = field.placeholder || field.previousElementSibling.textContent || field.name;
-                const value = field.value || field.options[field.selectedIndex].text;
-                doc.text(`${label}: ${value}`, 20, y);
-                y += 10;
-            });
-
-            doc.save("reporte_prestamos.pdf");
-        }
-    </script>
 </body>
 
 </html>
-

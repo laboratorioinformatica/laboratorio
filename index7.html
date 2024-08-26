@@ -23,7 +23,7 @@
 
         .container {
             background-color: #fff;
-            max-width: 800px; /* Ajustado para acomodar el contenido en dos filas */
+            max-width: 1000px; /* Aumentado para dos columnas */
             margin: 0 auto; /* Centrando verticalmente con flex en el body */
             padding: 30px;
             border-radius: 10px;
@@ -93,6 +93,24 @@
         #logo {
             display: none;
         }
+
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-container .form-column {
+            flex: 1;
+            margin: 0 10px; /* Espacio entre las dos columnas de formularios */
+        }
+
+        .form-container .form-column:first-child {
+            margin-left: 0; /* Eliminar margen izquierdo en la primera columna */
+        }
+
+        .form-container .form-column:last-child {
+            margin-right: 0; /* Eliminar margen derecho en la última columna */
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
@@ -102,9 +120,10 @@
         <img alt="Atento" id="logo" src="logo.png" width="255" height="50">&nbsp;&nbsp;&nbsp;&nbsp;
         <h1>Sistema de Entrega</h1>
         <h3>Módulo Préstamos</h3>
-        <form id="reporteForm" autocomplete="off">
-            <div class="row">
-                <div class="col-md-6">
+        <div class="form-container">
+            <!-- Formulario 1 -->
+            <div class="form-column">
+                <form id="reporteForm1" autocomplete="off">
                     <div class="form-group">
                         <label for="field_11">Nombre:</label>
                         <input id="field_11" name="field_11" minlength="5" maxlength="40" type="text" placeholder="Nombre"
@@ -134,8 +153,12 @@
                         <input id="field_1" name="field_1" type="text" maxlength="30" minlength="2" placeholder="Préstamos"
                             onkeyup="javascript:this.value=this.value.toUpperCase();" required>
                     </div>
-                </div>
-                <div class="col-md-6">
+                </form>
+            </div>
+
+            <!-- Formulario 2 -->
+            <div class="form-column">
+                <form id="reporteForm2" autocomplete="off">
                     <div class="form-group">
                         <label for="field_2">Préstamos 2:</label>
                         <input id="field_2" name="field_2" type="text" maxlength="30" minlength="2" placeholder="Préstamos 2"
@@ -161,21 +184,21 @@
                             <option value="ATENTO SPAIN HOLDCO 6, S.A.U.">ATENTO SPAIN HOLDCO</option>
                         </select>
                     </div>
-                </div>
+                </form>
             </div>
+        </div>
 
-            <div class="btn-group">
-                <a href="#" class="btn" onclick="generatePDF()">
-                    <i class="fas fa-download"></i> Descargar PDF
-                </a>
-                <button type="reset" class="btn">
-                    <i class="fas fa-eraser"></i> Borrar
-                </button>
-                <a href="index.html" class="btn">
-                    <i class="fas fa-home"></i> Inicio
-                </a>
-            </div>
-        </form>
+        <div class="btn-group">
+            <a href="#" class="btn" onclick="generatePDF()">
+                <i class="fas fa-download"></i> Descargar PDF
+            </a>
+            <button type="reset" class="btn">
+                <i class="fas fa-eraser"></i> Borrar
+            </button>
+            <a href="index.html" class="btn">
+                <i class="fas fa-home"></i> Inicio
+            </a>
+        </div>
     </div>
 
     <script>
@@ -210,3 +233,4 @@
 </body>
 
 </html>
+

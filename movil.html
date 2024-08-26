@@ -36,104 +36,106 @@
             color: #007bff;
         }
 
-        .button {
-            text-decoration: none;
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 15px;
-            border-radius: 5px;
-            display: inline-block;
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
             font-weight: bold;
-            text-align: center;
-            width: 100%;
-            margin-bottom: 10px;
-            transition: background-color 0.3s, transform 0.2s;
-            border: none;
-            cursor: pointer;
         }
 
-        .button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-
-        fieldset {
-            margin-bottom: 10px;
-        }
-
-        select,
-        input[type="text"] {
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            border: 1px solid #ccc;
+            text-transform: uppercase; /* Convertir texto a mayúsculas automáticamente */
         }
 
-        .row {
+        .btn-group {
             display: flex;
             justify-content: space-between;
-            gap: 10px;
-            flex-wrap: wrap;
         }
 
-        .row .button {
-            flex: 1 1 calc(33% - 10px); /* Asegura que los elementos ocupen el 33% del ancho menos el gap */
+        .btn {
+            flex: 1;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn i {
+            margin-right: 5px;
+        }
+
+        #logo {
+            display: none; /* Ocultar la imagen en la vista previa HTML */
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body>
-  
+    <!-- Logo -->
+    <img alt="Atento" id="logo" src="logo.png" width="255" height="50">&nbsp;&nbsp;&nbsp;&nbsp;
 
-    <!-- Inicio content -->  
-    <div class="container"> 
-        <center>
-            <h1 class="mt-5">SISTEMA DE ENTREGA /  MODULO MOVILES</h1>
-        </center>
-        <br>
+    <!-- Inicio content -->
+    <div class="container">
+        <h1 class="mt-5">SISTEMA DE ENTREGA / MODULO MOVILES</h1>
         <form name="reporte" id="reporteForm" action="movilreporte.php" method="post" autocomplete="off">
-            <fieldset>
-                <input id="field_01" name="field_01" placeholder="Nombre:" minlength="5" maxlength="40" type="text" tabindex="1" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{5,48}" title="El usuario debe colocar Nombre y Apellido." value="" onkeyup="javascript:this.value=this.value.toUpperCase();" autofocus required>
-            </fieldset>
-            <fieldset>
+            <div class="form-group">
+                <label for="field_01">Nombre:</label>
+                <input id="field_01" name="field_01" type="text" placeholder="Nombre:" minlength="5" maxlength="40" tabindex="1" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{5,48}" title="El usuario debe colocar Nombre y Apellido." onkeyup="javascript:this.value=this.value.toUpperCase();" autofocus required>
+            </div>
+            <div class="form-group">
                 <label for="field_02">ID-DNI-NIE:</label>
                 <select id="field_02" name="field_02" tabindex="3">
                     <option value="DNI">DNI</option>
                     <option value="ID">ID</option>
                     <option value="NIE">NIE</option>
                 </select>
-            </fieldset>
-            <fieldset>
-                <input id="field_03" name="field_03" placeholder="ID-DNI-NIE:" type="text" tabindex="3" value="" title="Introduzca un ID/DNI/NIE válido con números y letra." maxlength="14" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-            </fieldset>
-            <fieldset>
-                <input id="field_04" name="field_04" placeholder="Modelo del Teléfono:" type="text" tabindex="4" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-                <input id="field_05" name="field_05" placeholder="Serial del Teléfono:" type="text" tabindex="5" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-                <input id="field_06" name="field_06" placeholder="Número del Teléfono:" type="text" tabindex="6" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-            </fieldset>
-            <fieldset>
-                <input id="field_07" name="field_07" placeholder="IMEI 1:" type="text" tabindex="7" maxlength="15" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();">
-                <input id="field_08" name="field_08" placeholder="IMEI 2:" type="text" tabindex="8" maxlength="15" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();">
-            </fieldset>
-            <fieldset>
-                <input id="field_09" name="field_09" placeholder="Prestamo 1:" type="text" tabindex="9" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();">
-                <input id="field_10" name="field_10" placeholder="Prestamo 2:" type="text" tabindex="10" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();">
-                <input id="field_12" name="field_12" placeholder="Prestamo 3:" type="text" tabindex="12" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();">
-                <input id="field_13" name="field_13" placeholder="Prestamo 4:" type="text" tabindex="13" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();">
-            </fieldset>
-            <fieldset>
+            </div>
+            <div class="form-group">
+                <input id="field_03" name="field_03" type="text" placeholder="ID-DNI-NIE:" tabindex="3" title="Introduzca un ID/DNI/NIE válido con números y letra." maxlength="14" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+            </div>
+            <div class="form-group">
+                <input id="field_04" name="field_04" type="text" placeholder="Modelo del Teléfono:" tabindex="4" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                <input id="field_05" name="field_05" type="text" placeholder="Serial del Teléfono:" tabindex="5" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                <input id="field_06" name="field_06" type="text" placeholder="Número del Teléfono:" tabindex="6" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+            </div>
+            <div class="form-group">
+                <input id="field_07" name="field_07" type="text" placeholder="IMEI 1:" tabindex="7" maxlength="15" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <input id="field_08" name="field_08" type="text" placeholder="IMEI 2:" tabindex="8" maxlength="15" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();">
+            </div>
+            <div class="form-group">
+                <input id="field_09" name="field_09" type="text" placeholder="Prestamo 1:" tabindex="9" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <input id="field_10" name="field_10" type="text" placeholder="Prestamo 2:" tabindex="10" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <input id="field_12" name="field_12" type="text" placeholder="Prestamo 3:" tabindex="12" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <input id="field_13" name="field_13" type="text" placeholder="Prestamo 4:" tabindex="13" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();">
+            </div>
+            <div class="form-group">
                 <label for="field_11">EMPRESA:</label>
                 <select id="field_11" name="field_11" tabindex="14">
                     <option value="ATENTO TELESERVICIOS ESPAÑA, S.A.U.">ATENTO TELESERVICIOS ESPAÑA</option>
                     <option value="ATENTO SPAIN HOLDCO 6, S.A.U.">ATENTO SPAIN HOLDCO</option>
                 </select>
-            </fieldset>
-            <div class="row">
-                <a href="#" class="button" onclick="generatePDF()">Descargar PDF</a>
-                <button type="reset" class="button">Borrar</button>
-                <a href="index.html" class="button">Inicio</a>
+            </div>
+            <div class="btn-group">
+                <a href="#" class="btn" onclick="generatePDF()"><i class="fas fa-download"></i> Descargar PDF</a>
+                <button type="reset" class="btn"><i class="fas fa-trash-alt"></i> Borrar</button>
+                <a href="index.html" class="btn"><i class="fas fa-home"></i> Inicio</a>
             </div>
         </form>
     </div>
@@ -169,3 +171,4 @@
 </body>
 
 </html>
+

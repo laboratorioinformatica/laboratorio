@@ -23,8 +23,8 @@
 
         .container {
             background-color: #fff;
-            max-width: 500px;
-            margin: 200px;
+            max-width: 800px; /* Ajustado para acomodar el contenido en dos filas */
+            margin: 100px auto; /* Mayor margen superior */
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -32,17 +32,23 @@
 
         h1 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             color: #007bff;
         }
 
+        h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #6c757d;
+        }
+
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-weight: bold;
         }
 
@@ -58,6 +64,7 @@
         .btn-group {
             display: flex;
             justify-content: space-between;
+            margin-top: 20px;
         }
 
         .btn {
@@ -68,7 +75,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin: 5px;
+            margin: 0 5px;
             transition: background-color 0.3s;
             display: flex;
             align-items: center;
@@ -96,60 +103,65 @@
         <h1>Sistema de Entrega</h1>
         <h3>Módulo Préstamos</h3>
         <form id="reporteForm" autocomplete="off">
-            <div class="form-group">
-                <label for="field_11">Nombre:</label>
-                <input id="field_11" name="field_11" minlength="5" maxlength="40" type="text" placeholder="Nombre"
-                    pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{5,48}"
-                    title="El usuario debe colocar Nombre y Apellido." onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="field_11">Nombre:</label>
+                        <input id="field_11" name="field_11" minlength="5" maxlength="40" type="text" placeholder="Nombre"
+                            pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{5,48}"
+                            title="El usuario debe colocar Nombre y Apellido." onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                    </div>
 
-            <div class="form-group">
-                <label for="field_02">DNI-ID-NIE</label>
-                <select id="field_02" name="field_02">
-                    <option value="DNI">DNI</option>
-                    <option value="ID">ID</option>
-                    <option value="NIE">NIE</option>
-                </select>
-            </div>
+                    <div class="form-group">
+                        <label for="field_02">DNI-ID-NIE</label>
+                        <select id="field_02" name="field_02">
+                            <option value="DNI">DNI</option>
+                            <option value="ID">ID</option>
+                            <option value="NIE">NIE</option>
+                        </select>
+                    </div>
 
-            <div class="form-group">
-                <label for="field_22">DNI/ID/NIE:</label>
-                <input id="field_22" name="field_22" type="text" title="Introduzca un DNI/ID/NIE válido con números y letra."
-                    pattern="(([A-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))|(([A-Z])([-]?)(\d{8}))"
-                    maxlength="12" minlength="8" placeholder="DNI/ID/NIE"
-                    onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-            </div>
+                    <div class="form-group">
+                        <label for="field_22">DNI/ID/NIE:</label>
+                        <input id="field_22" name="field_22" type="text" title="Introduzca un DNI/ID/NIE válido con números y letra."
+                            pattern="(([A-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))|(([A-Z])([-]?)(\d{8}))"
+                            maxlength="12" minlength="8" placeholder="DNI/ID/NIE"
+                            onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                    </div>
 
-            <div class="form-group">
-                <label for="field_1">Préstamos:</label>
-                <input id="field_1" name="field_1" type="text" maxlength="30" minlength="2" placeholder="Préstamos"
-                    onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-            </div>
+                    <div class="form-group">
+                        <label for="field_1">Préstamos:</label>
+                        <input id="field_1" name="field_1" type="text" maxlength="30" minlength="2" placeholder="Préstamos"
+                            onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="field_2">Préstamos 2:</label>
+                        <input id="field_2" name="field_2" type="text" maxlength="30" minlength="2" placeholder="Préstamos 2"
+                            onkeyup="javascript:this.value=this.value.toUpperCase();">
+                    </div>
 
-            <div class="form-group">
-                <label for="field_2">Préstamos 2:</label>
-                <input id="field_2" name="field_2" type="text" maxlength="30" minlength="2" placeholder="Préstamos 2"
-                    onkeyup="javascript:this.value=this.value.toUpperCase();">
-            </div>
+                    <div class="form-group">
+                        <label for="field_3">Préstamos 3:</label>
+                        <input id="field_3" name="field_3" type="text" maxlength="30" minlength="2" placeholder="Préstamos 3"
+                            onkeyup="javascript:this.value=this.value.toUpperCase();">
+                    </div>
 
-            <div class="form-group">
-                <label for="field_3">Préstamos 3:</label>
-                <input id="field_3" name="field_3" type="text" maxlength="30" minlength="2" placeholder="Préstamos 3"
-                    onkeyup="javascript:this.value=this.value.toUpperCase();">
-            </div>
+                    <div class="form-group">
+                        <label for="field_4">Préstamos 4:</label>
+                        <input id="field_4" name="field_4" type="text" maxlength="30" minlength="2" placeholder="Préstamos 4"
+                            onkeyup="javascript:this.value=this.value.toUpperCase();">
+                    </div>
 
-            <div class="form-group">
-                <label for="field_4">Préstamos 4:</label>
-                <input id="field_4" name="field_4" type="text" maxlength="30" minlength="2" placeholder="Préstamos 4"
-                    onkeyup="javascript:this.value=this.value.toUpperCase();">
-            </div>
-
-            <div class="form-group">
-                <label for="field_44">Empresa</label>
-                <select id="field_44" name="field_44">
-                    <option value="ATENTO TELESERVICIOS ESPAÑA, S.A.U.">ATENTO TELESERVICIOS ESPAÑA</option>
-                    <option value="ATENTO SPAIN HOLDCO 6, S.A.U.">ATENTO SPAIN HOLDCO</option>
-                </select>
+                    <div class="form-group">
+                        <label for="field_44">Empresa</label>
+                        <select id="field_44" name="field_44">
+                            <option value="ATENTO TELESERVICIOS ESPAÑA, S.A.U.">ATENTO TELESERVICIOS ESPAÑA</option>
+                            <option value="ATENTO SPAIN HOLDCO 6, S.A.U.">ATENTO SPAIN HOLDCO</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <div class="btn-group">
@@ -198,3 +210,4 @@
 </body>
 
 </html>
+

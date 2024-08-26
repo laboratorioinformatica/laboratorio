@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,8 +26,8 @@
         }
         .container {
             background-color: #fff;
-            max-width: 500px;
-            margin: 150px auto; /* Margen superior incrementado */
+            max-width: 600px;
+            margin: 0 auto;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -43,11 +46,11 @@
             display: inline-block;
             font-weight: bold;
             text-align: center;
-            width: 100%;
             margin-bottom: 10px;
             transition: background-color 0.3s, transform 0.2s;
             border: none;
             cursor: pointer;
+            width: 100%;
         }
         .button:hover {
             background-color: #0056b3;
@@ -57,15 +60,23 @@
             margin-right: 5px; /* Espacio entre el icono y el texto */
         }
         fieldset {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            border: none;
         }
         select,
         input[type="text"] {
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+        table td {
+            padding: 10px;
         }
         .row {
             display: flex;
@@ -82,17 +93,15 @@
 
     <!-- Inicio content -->  
     <div class="container"> 
-        <center>
-            <h1 class="mt-5">SISTEMA DE ENTREGA Y RECEPCIÓN DE MATERIAL</h1>
-        </center>
+        <h1>SISTEMA DE ENTREGA Y RECEPCIÓN DE MATERIAL</h1>
         <form id="reporteForm" autocomplete="off">
             <fieldset>
-                <input id="field_1" name="field_11" placeholder="Nombre:" size="20" minlength="5" maxlength="40" type="text" tabindex="1" onkeyup="this.value=this.value.toUpperCase();" title="Letras y números. Tamaño mínimo: 5. Tamaño máximo: 40" autofocus>
+                <input id="field_1" name="field_11" placeholder="Nombre:" minlength="5" maxlength="40" type="text" tabindex="1" onkeyup="this.value=this.value.toUpperCase();" title="Letras y números. Tamaño mínimo: 5. Tamaño máximo: 40" autofocus>
             </fieldset>
             <fieldset>
                 <input id="field_22" name="field_22" placeholder="DNI:" type="text" tabindex="2" maxlength="9" minlength="2" onkeyup="this.value=this.value.toUpperCase();" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" required>
             </fieldset>
-            <table class="default">
+            <table>
                 <tr>
                     <td>Auricular</td>
                     <td>
@@ -106,8 +115,7 @@
                     </td>
                 </tr>
             </table>
-            <br>
-            <table class="default">
+            <table>
                 <tr>
                     <td>Portátil</td>
                     <td>
@@ -123,19 +131,15 @@
                     </td>
                 </tr>
             </table>
-            <br>
             <fieldset>
-                <input id="field_4" name="field_34" placeholder="Serial o Codigo:" type="text" tabindex="5" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
+                <input id="field_4" name="field_34" placeholder="Serial o Código:" type="text" tabindex="5" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
             </fieldset>
-            <br>
             <fieldset>
                 <input id="field_3" name="field_36" placeholder="Equipamiento entregado:" type="text" tabindex="6" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
             </fieldset>
-            <br>
             <fieldset>
                 <input id="field_3_2" name="field_35" placeholder="Equipamiento entregado 2:" type="text" tabindex="7" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
             </fieldset>
-            <br>
             <div class="row">
                 <a href="#" class="button" onclick="generatePDF()"><i class="fas fa-download"></i> Descargar PDF</a>
                 <button type="reset" class="button"><i class="fas fa-eraser"></i> Borrar</button>
@@ -176,9 +180,6 @@
     </script>
 </body>
 </html>
-
-
-
 
 
 

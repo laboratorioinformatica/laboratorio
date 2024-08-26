@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,22 +22,12 @@
             height: 100vh;
         }
         .container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 20px; /* Espacio entre las columnas */
-            max-width: 1200px;
-            width: 100%;
-            padding: 30px;
-            box-sizing: border-box;
-        }
-        .form-column {
             background-color: #fff;
-            padding: 20px;
+            max-width: 500px;
+            margin: 150px auto; /* Margen superior incrementado */
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px; /* Ancho máximo para cada columna de formulario */
         }
         h1 {
             text-align: center;
@@ -77,99 +67,118 @@
             border-radius: 5px;
             border: 1px solid #ccc;
         }
+        .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .row .button {
+            flex: 1 1 calc(33.33% - 10px); /* Ajuste para tres botones */
+        }
     </style>
 </head>
 <body>
 
     <!-- Inicio content -->  
     <div class="container"> 
-        <div class="form-column">
-            <h1>Formulario 1</h1>
-            <form id="reporteForm1" autocomplete="off">
-                <fieldset>
-                    <input id="field_1" name="field_11" placeholder="Nombre:" size="20" minlength="5" maxlength="40" type="text" tabindex="1" onkeyup="this.value=this.value.toUpperCase();" title="Letras y números. Tamaño mínimo: 5. Tamaño máximo: 40" autofocus>
-                </fieldset>
-                <fieldset>
-                    <input id="field_22" name="field_22" placeholder="DNI:" type="text" tabindex="2" maxlength="9" minlength="2" onkeyup="this.value=this.value.toUpperCase();" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" required>
-                </fieldset>
-                <fieldset>
-                    <input id="field_4" name="field_34" placeholder="Serial o Codigo:" type="text" tabindex="5" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
-                </fieldset>
-                <div class="row">
-                    <a href="#" class="button" onclick="generatePDF1()"><i class="fas fa-download"></i> Descargar PDF</a>
-                    <button type="reset" class="button"><i class="fas fa-eraser"></i> Borrar</button>
-                </div>
-            </form>
-        </div>
-        
-        <div class="form-column">
-            <h1>Formulario 2</h1>
-            <form id="reporteForm2" autocomplete="off">
-                <fieldset>
-                    <input id="field_33" name="field_33" placeholder="Auricular:" type="text" tabindex="3">
-                </fieldset>
-                <fieldset>
-                    <input id="field_44" name="field_44" placeholder="Portátil:" type="text" tabindex="4">
-                </fieldset>
-                <fieldset>
-                    <input id="field_3" name="field_36" placeholder="Equipamiento entregado:" type="text" tabindex="6">
-                </fieldset>
-                <fieldset>
-                    <input id="field_3_2" name="field_35" placeholder="Equipamiento entregado 2:" type="text" tabindex="7">
-                </fieldset>
-                <div class="row">
-                    <a href="#" class="button" onclick="generatePDF2()"><i class="fas fa-download"></i> Descargar PDF</a>
-                    <button type="reset" class="button"><i class="fas fa-eraser"></i> Borrar</button>
-                </div>
-            </form>
-        </div>
+        <center>
+            <h1 class="mt-5">SISTEMA DE ENTREGA Y RECEPCIÓN DE MATERIAL</h1>
+        </center>
+        <form id="reporteForm" autocomplete="off">
+            <fieldset>
+                <input id="field_1" name="field_11" placeholder="Nombre:" size="20" minlength="5" maxlength="40" type="text" tabindex="1" onkeyup="this.value=this.value.toUpperCase();" title="Letras y números. Tamaño mínimo: 5. Tamaño máximo: 40" autofocus>
+            </fieldset>
+            <fieldset>
+                <input id="field_22" name="field_22" placeholder="DNI:" type="text" tabindex="2" maxlength="9" minlength="2" onkeyup="this.value=this.value.toUpperCase();" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" required>
+            </fieldset>
+            <table class="default">
+                <tr>
+                    <td>Auricular</td>
+                    <td>
+                        <select id="field_33" name="field_33" tabindex="3">
+                            <option value="">Selecciona opción</option>
+                            <option value="Plantronics C3220USB">Plantronics C3220USB</option>
+                            <option value="Accutone ZE-UB210">Accutone ZE-UB210</option>
+                            <option value="Plantronics Centralita">Plantronics Centralita</option>
+                            <option value="Auricular Otros">Auricular Otros</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <table class="default">
+                <tr>
+                    <td>Portátil</td>
+                    <td>
+                        <select id="field_44" name="field_44" tabindex="4">
+                            <option value="">Selecciona opción</option>
+                            <option value="HP 250 G7">HP 250 G7</option>
+                            <option value="HP 255 G7">HP 255 G7</option>
+                            <option value="HP 440 G5">HP 440 G5</option>
+                            <option value="HP 445R G6">HP 445R G6</option>
+                            <option value="HP 455 G7">HP 455 G7</option>
+                            <option value="DELL 3410">DELL 3410</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <fieldset>
+                <input id="field_4" name="field_34" placeholder="Serial o Codigo:" type="text" tabindex="5" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
+            </fieldset>
+            <br>
+            <fieldset>
+                <input id="field_3" name="field_36" placeholder="Equipamiento entregado:" type="text" tabindex="6" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
+            </fieldset>
+            <br>
+            <fieldset>
+                <input id="field_3_2" name="field_35" placeholder="Equipamiento entregado 2:" type="text" tabindex="7" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
+            </fieldset>
+            <br>
+            <div class="row">
+                <a href="#" class="button" onclick="generatePDF()"><i class="fas fa-download"></i> Descargar PDF</a>
+                <button type="reset" class="button"><i class="fas fa-eraser"></i> Borrar</button>
+                <a href="index.html" class="button"><i class="fas fa-home"></i> Inicio</a>
+            </div>
+        </form>
     </div>
 
     <!-- jsPDF library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
-        function generatePDF1() {
+        function generatePDF() {
             const { jsPDF } = window.jspdf;
 
-            // Get form data for Form 1
+            // Get form data
             const nombre = document.getElementById('field_1').value;
             const dni = document.getElementById('field_22').value;
-            const serial = document.getElementById('field_4').value;
-
-            const doc = new jsPDF();
-
-            doc.setFontSize(12);
-            doc.text('Formulario 1', 10, 10);
-            doc.text(`Nombre: ${nombre}`, 10, 20);
-            doc.text(`DNI: ${dni}`, 10, 30);
-            doc.text(`Serial o Código: ${serial}`, 10, 40);
-
-            doc.save('formulario1.pdf');
-        }
-
-        function generatePDF2() {
-            const { jsPDF } = window.jspdf;
-
-            // Get form data for Form 2
             const auricular = document.getElementById('field_33').value;
             const portatil = document.getElementById('field_44').value;
+            const serial = document.getElementById('field_4').value;
             const equipamiento1 = document.getElementById('field_3').value;
             const equipamiento2 = document.getElementById('field_3_2').value;
 
             const doc = new jsPDF();
 
             doc.setFontSize(12);
-            doc.text('Formulario 2', 10, 10);
-            doc.text(`Auricular: ${auricular}`, 10, 20);
-            doc.text(`Portátil: ${portatil}`, 10, 30);
-            doc.text(`Equipamiento Entregado: ${equipamiento1}`, 10, 40);
-            doc.text(`Equipamiento Entregado 2: ${equipamiento2}`, 10, 50);
+            doc.text('Reporte de Entrega y Recepción de Material', 10, 10);
+            doc.text(`Nombre: ${nombre}`, 10, 20);
+            doc.text(`DNI: ${dni}`, 10, 30);
+            doc.text(`Auricular: ${auricular}`, 10, 40);
+            doc.text(`Portátil: ${portatil}`, 10, 50);
+            doc.text(`Serial o Código: ${serial}`, 10, 60);
+            doc.text(`Equipamiento Entregado: ${equipamiento1}`, 10, 70);
+            doc.text(`Equipamiento Entregado 2: ${equipamiento2}`, 10, 80);
 
-            doc.save('formulario2.pdf');
+            doc.save('reporte.pdf');
         }
     </script>
 </body>
 </html>
+
+
+
 
 
 

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <img alt="Atento" id="logo" src="logo.png" width="255" height="50">&nbsp;&nbsp;&nbsp;&nbsp;
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            max-width: 500px;
+            margin: 20px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-transform: uppercase; /* Convertir texto a mayúsculas automáticamente */
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn {
+            flex: 1;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn i {
+            margin-right: 5px;
+        }
+        #logo {
+            display: none; /* Ocultar la imagen en la vista previa HTML */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sistema de Entrega</h1>
+        <div class="form-group">
+            <label for="field_01">Nombre:</label>
+            <input id="field_01" name="field_01" placeholder="Nombre Completo" minlength="5" maxlength="40" type="text" required oninput="toUpperCase(this)">
+        </div>
+        <div class="form-group">
+            <label for="field_02">Documento:</label>
+            <select id="field_02" name="field_02" required>
+                <option value="ES">ES</option>
+                <option value="DNI">DNI</option>
+                <option value="NIE">NIE</option>
+            </select>
+            <input id="field_03" name="field_03" placeholder="Número de Documento" type="text" maxlength="12" minlength="2" required oninput="toUpperCase(this)">
+        </div>
+        <div class="form-group">
+            <label for="field_04">Auricular:</label>
+            <select id="field_04" name="field_04" required>
+                <option value="">Selecciona opción</option>
+                <option value="Plantronics C3220USB">Plantronics C3220USB</option>
+                <option value="Accutone ZE-UB210">Accutone ZE-UB210</option>
+                <option value="Plantronics Centralita">Plantronics Centralita</option>
+                <option value="Plantronics USB">Plantronics USB</option>
+                <option value="Auricular Otros">Auricular Otros</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_05">Empresa:</label>
+            <select id="field_05" name="field_05" required>
+                <option value="ATENTO TELESERVICIOS ESPAÑA, S.A.U.">ATENTO TELESERVICIOS ESPAÑA</option>
+                <option value="ATENTO SPAIN HOLDCO 6, S.A.U.">ATENTO SPAIN HOLDCO</option>
+            </select>
+        </div>
+        <div class="btn-group">
+            <button class="btn" onclick="generatePDF()">
+                <i class="fas fa-file-pdf"></i> Generar PDF
+            </button>
+            <button class="btn" onclick="clearForm()">
+                <i class="fas fa-eraser"></i> Borrar
+            </button>
+            <button class="btn" onclick="resetPage()">
+                <i class="fas fa-home"></i> Inicio
+            </button>
+        </div>
+    </div>
+  
+    <script>
+        function toUpperCase(input) {
+            input.value = input.value.toUpperCase();
+        }
+
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            var pageWidth = doc.internal.pageSize.getWidth(); 
+            var margin = 20; 
+            var contentWidth = pageWidth - 2 * margin; 
+            var x = margin; 
+            var y = 8; 
+
+            var imgData = document.getElementById('logo');
+            if (imgData) {
+                doc.addImage(imgData.src, 'PNG', margin, y, 40, 20); 
+                y += 20; // Espacio para la imagen y su margen
+            }
+
+            var saltoDeLinea = 7;
+
+            const nombres = document.getElementById('field_01').value;
+            const cedula = document.getElementById('field_02').value;
+            const numeracion = document.getElementById('field_03').value;
+            const equipamiento = document.getElementById('field_04').value;
+            const empresa = document.getElementById('field_05').value;
+
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const year = today.getFullYear();
+            const hours = String(today.getHours()).padStart(2, '0');
+            const minutes = String(today.getMinutes()).padStart(2, '0');
+            const seconds = String(today.getSeconds()).padStart(2, '0');
+
+            const currentDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+            
+            doc.setFontSize(10);
+            doc.text(currentDate, pageWidth - margin, y, { align: "right" });
+            
+            y += saltoDeLinea * 2; 
+
+            var mainTitle = "DOCUMENTO DE ENTREGA Y RECEPCION DE MATERIAL";
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold"); 
+            var titleWidth = doc.getTextWidth(mainTitle);
+            var titleX = (pageWidth - titleWidth) / 2;
+            doc.text(mainTitle, titleX, y);
+            y += saltoDeLinea * 2;
+            
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "normal");
+
+            doc.setFontSize(9);
+
+            var texto1 = `I.- El abajo firmante D./Dª. ${nombres}, provisto/a ${cedula} ${numeracion} (en adelante, el 'Empleado/a') manifiesta que es empleado/a de ${empresa} (en adelante, 'Atento').`;
+            var texto2 = "II.- Que Atento hace entrega al Empleado/a del equipamiento que se detalla a continuación para la correcta prestación del servicio al que está adscrito.";
+            var texto22 = "Equipamiento entregado:";
+            var texto222 = `-${equipamiento}`;
+  
+            var texto3 = "III.- Que el Empleado/a mediante la firma del presente documento acusa recibo del equipamiento descrito en el expositivo anterior.";
+            var texto4 = "IV.- Que el Empleado/a se obliga, bajo su responsabilidad, a custodiar y conservar el equipamiento entregado, a su cuidado, a darle un correcto uso y a utilizarlo única y exclusivamente para el desarrollo de su actividad laboral con Atento.";
+            var texto5 = "V.- El Empleado/a se obliga a devolver, cuando así le sea requerido por Atento, el equipamiento aquí detallado, en las mismas condiciones que le fue entregado y en el centro de trabajo asociado, en un plazo no superior a siete (7) días naturales. Pudiendo ser apercibido en caso de no hacerlo, instándose además las medidas legales que correspondan.";
+            var texto6 = "VI.- El Empleado/a exonera a Atento de cualquier deficiencia o desperfecto causado por un mal uso del equipamiento llevado a cabo por el Empleado/a, asumiendo el Empleado el coste del mantenimiento, reparación o reposición de los equipos afectados, siendo decisión de Atento la elección del proveedor o servicio técnico que tenga que llevar a cabo su reparación o sustitución.";
+            var texto7 = "VII.- En todo caso, cuando el Empleado/a cause baja en la empresa, deberá devolver el equipamiento aquí descrito, en las mismas condiciones que le fue entregado y en el centro de trabajo asociado, en un plazo no superior a siete (7) días naturales, procediéndose a adoptar las medidas legales oportunas en caso contrario.";
+
+            var textos = [texto1, texto2, texto22, texto222, texto3, texto4, texto5, texto6, texto7];
+
+            textos.forEach(function(texto, index) {
+                if (index === 2 || index === 3) { 
+                    doc.setFont("helvetica", "bold"); 
+                } else {
+                    doc.setFont("helvetica", "normal"); 
+                }
+                var lineas = doc.splitTextToSize(texto, contentWidth);
+                lineas.forEach(function(linea, idx) {
+                    var indent = 0;
+                    if (index === 2 || index === 3) {
+                        indent = 10; // Ajusta la indentación para los párrafos importantes
+                    }
+                    doc.text(linea, x + indent, y);
+                    y += saltoDeLinea;
+                });
+            });
+            
+            y += saltoDeLinea; 
+            doc.text(`Y para que así conste, suscriben el presente en Barcelona, a ${day}/${month}/${year}.`, x, y);
+             
+            y += saltoDeLinea * 2;
+
+            var firmasText = "Firma Empleado/a                      Firma Responsable Directo                        Firma Departamento IT";
+            doc.setFontSize(10);
+            doc.text(firmasText, x, y);
+            
+            doc.save(`${numeracion}.pdf`);
+        }
+
+        function clearForm() {
+            document.getElementById('field_01').value = '';
+            document.getElementById('field_02').selectedIndex = 0;
+            document.getElementById('field_03').value = '';
+            document.getElementById('field_04').selectedIndex = 0;
+            document.getElementById('field_05').selectedIndex = 0;
+        }
+
+        function resetPage() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        .container, .pdf-section {
+            background-color: #fff;
+            max-width: 500px;
+            width: 100%; /* Ajustar el ancho a 100% del contenedor padre */
+            margin: 20px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center; /* Alinear botones al centro */
+        }
+        .button {
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            font-weight: bold;
+            text-align: center;
+            width: 150px; /* Ancho fijo para los botones */
+            margin-bottom: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+            box-sizing: border-box; /* Asegurar que el tamaño incluya el padding y border */
+        }
+        .button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        #logo {
+            display: none; /* Ocultar la imagen en la vista previa HTML */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img alt="Atento" id="logo" src="logo.png" width="255" height="50">
+        <h1>SISTEMA DE GESTIÓN</h1>
+        <hr>
+        <div class="row">
+            <a href="movil.html" class="button">Movil</a>
+            <a href="index4.html" class="button">Portátiles</a>
+            <a href="index6.html" class="button">Auricular</a>
+            <a href="index7.html" class="button">Préstamos</a>
+            <a href="usage.html" class="button">Generador Contraseña</a>
+            <a href="index2.html" class="button">Personalizado</a>
+        </div>
+    </div>
+    
+    <div class="pdf-section">
+        <h2>Mapas PDF</h2>
+        <div class="row">
+            <a href="Mapa_P4A.pdf" class="button" target="_blank">4 A</a>
+            <a href="Mapa_P4B.pdf" class="button" target="_blank">4 B</a>
+            <a href="Mapa_P4C.pdf" class="button" target="_blank">4 C</a>
+           
+            <a href="Mapa_P3B.pdf" class="button" target="_blank">3 B</a>
+            <a href="Mapa_P3CD.pdf" class="button" target="_blank">3 C & D</a>
+            <a href="Mapa_P2B.pdf" class="button" target="_blank">2</a>
+        </div>
+    </div>
+</body>
+</html>
+

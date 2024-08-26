@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Préstamos</title>
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            max-width: 500px;
+            margin: 20px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .button {
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        fieldset {
+            margin-bottom: 10px;
+        }
+
+        select,
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .row .button {
+            flex: 1 1 calc(50% - 10px); /* Esto asegura que los botones ocupen el 50% del ancho menos el gap */
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Sistema de Entrega</h1>
+        <h3>Módulo Préstamos</h3>
+        <form id="reporteForm" autocomplete="off">
+            <fieldset>
+                <input id="field_11" name="field_11" placeholder="Nombre:" minlength="5" maxlength="40" type="text"
+                    pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{5,48}"
+                    title="El usuario debe colocar Nombre y Apellido." onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+            </fieldset>
+
+            <fieldset>
+                <label for="field_02">DNI-ID-NIE</label>
+                <select id="field_02" name="field_02">
+                    <option value="DNI">DNI</option>
+                    <option value="ID">ID</option>
+                    <option value="NIE">NIE</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <input id="field_22" name="field_22" placeholder="DNI/ID/NIE:" type="text" title="Introduzca un DNI/ID/NIE válido con números y letra."
+                    pattern="(([A-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))|(([A-Z])([-]?)(\d{8}))" maxlength="12" minlength="8"
+                    onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+            </fieldset>
+
+            <fieldset>
+                <input id="field_1" name="field_1" placeholder="Préstamos:" type="text" maxlength="30" minlength="2"
+                    onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+            </fieldset>
+
+            <fieldset>
+                <input id="field_2" name="field_2" placeholder="Préstamos 2:" type="text" maxlength="30" minlength="2"
+                    onkeyup="javascript:this.value=this.value.toUpperCase();">
+            </fieldset>
+
+            <fieldset>
+                <input id="field_3" name="field_3" placeholder="Préstamos 3:" type="text" maxlength="30" minlength="2"
+                    onkeyup="javascript:this.value=this.value.toUpperCase();">
+            </fieldset>
+
+            <fieldset>
+                <input id="field_4" name="field_4" placeholder="Préstamos 4:" type="text" maxlength="30" minlength="2"
+                    onkeyup="javascript:this.value=this.value.toUpperCase();">
+            </fieldset>
+
+            <fieldset>
+                <label for="field_44">Empresa</label>
+                <select id="field_44" name="field_44">
+                    <option value="ATENTO TELESERVICIOS ESPAÑA, S.A.U.">ATENTO TELESERVICIOS ESPAÑA</option>
+                    <option value="ATENTO SPAIN HOLDCO 6, S.A.U.">ATENTO SPAIN HOLDCO</option>
+                </select>
+            </fieldset>
+
+            <div class="row">
+            
+                <a href="#" class="button" onclick="generatePDF()">Descargar PDF</a>
+                <button type="reset" class="button">Borrar</button>
+                <a href="index.html" class="button">Inicio</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(20);
+            doc.text("Sistema de Entrega", 105, 20, null, null, "center");
+
+            doc.setFontSize(16);
+            doc.text("Módulo Préstamos", 105, 30, null, null, "center");
+
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+
+            const fields = ["field_11", "field_02", "field_22", "field_1", "field_2", "field_3", "field_4", "field_44"];
+            let y = 50;
+
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                const label = field.placeholder || field.previousElementSibling.textContent || field.name;
+                const value = field.value || field.options[field.selectedIndex].text;
+                doc.text(`${label}: ${value}`, 20, y);
+                y += 10;
+            });
+
+            doc.save("reporte_prestamos.pdf");
+        }
+
+        function displayPasswords() {
+            alert("Functionality to generate passwords is not implemented.");
+        }
+    </script>
+</body>
+
+</html>

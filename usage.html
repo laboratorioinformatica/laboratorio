@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Contraseña</title>
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            max-width: 500px;
+            margin: 20px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        h3 {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .button {
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        function passwordGenerate(chars) {
+            const data = '1234567890****';
+            return data.split('').sort(() => Math.random() - 0.5).join('').substring(0, chars);
+        }
+
+        function generatePassword(length) {
+            const pattern = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890@";
+            let key = "";
+            for (let i = 0; i < length; i++) {
+                key += pattern.charAt(Math.floor(Math.random() * pattern.length));
+            }
+            return key;
+        }
+
+        function generatePasswordd(length) {
+            const pattern = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890@.";
+            let key = "";
+            for (let i = 0; i < length; i++) {
+                key += pattern.charAt(Math.floor(Math.random() * pattern.length));
+            }
+            return key;
+        }
+
+        function generatePassworddd(length) {
+            const pattern = "1234567890";
+            let key = "";
+            for (let i = 0; i < length; i++) {
+                key += pattern.charAt(Math.floor(Math.random() * pattern.length));
+            }
+            return key;
+        }
+
+        function generatePasswordsd(length) {
+            const pattern = "1234567890";
+            let key = "";
+            for (let i = 0; i < length; i++) {
+                key += pattern.charAt(Math.floor(Math.random() * pattern.length));
+            }
+            return key;
+        }
+
+        function randomPassword() {
+            const length = 10;
+            return Math.random().toString(36).slice(-length);
+        }
+
+        function generarPasswordComplejo(length) {
+            const base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#%^&*()_,./<>?;:[]{}\\|=+';
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                password += base.charAt(Math.floor(Math.random() * base.length));
+            }
+            return password;
+        }
+
+        function _generarPasswd() {
+            const cadena = Math.random().toString(36).substr(2) + new Date().getTime().toString(36);
+            const inicio = Math.floor(Math.random() * (cadena.length - 9));
+            return cadena.substr(inicio, 64);
+        }
+
+        function displayPasswords() {
+            document.getElementById('password1').innerText = "Atento2024*" + generatePassworddd(4);
+            document.getElementById('password2').innerText = "Atento2024." + generatePassworddd(2);
+            document.getElementById('password3').innerText = "At3nto*" + passwordGenerate(6);
+            document.getElementById('password4').innerText = generatePassword(8);
+            document.getElementById('password5').innerText = "Atento*" + generatePasswordd(16);
+            document.getElementById('password6').innerText = "At3nto*" + generatePasswordsd(2);
+            document.getElementById('password7').innerText = randomPassword();
+            document.getElementById('password8').innerText = _generarPasswd();
+            document.getElementById('password9').innerText = generarPasswordComplejo(10);
+        }
+
+        function generarPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFont("Segoe UI", "bold");
+            doc.text("Generador de Contraseña", 105, 20, null, null, "center");
+            doc.setFontSize(12);
+            doc.text(`Contraseña 1: ${document.getElementById('password1').innerText}`, 10, 40);
+            doc.text(`Contraseña 2: ${document.getElementById('password2').innerText}`, 10, 50);
+            doc.text(`Contraseña 3: ${document.getElementById('password3').innerText}`, 10, 60);
+            doc.text(`Contraseña 4: ${document.getElementById('password4').innerText}`, 10, 70);
+            doc.text(`Contraseña 5: ${document.getElementById('password5').innerText}`, 10, 80);
+            doc.text(`Contraseña 6: ${document.getElementById('password6').innerText}`, 10, 90);
+            doc.text(`Contraseña 7: ${document.getElementById('password7').innerText}`, 10, 100);
+            doc.text(`Contraseña 8: ${document.getElementById('password8').innerText}`, 10, 110);
+            doc.text(`Contraseña 9: ${document.getElementById('password9').innerText}`, 10, 120);
+            doc.save("contraseñas_generadas.pdf");
+        }
+
+        window.onload = displayPasswords;
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Generador de Contraseña</h1>
+        <p style="text-align: center;">La Contraseña es Temporal para el inicio de sesión, Es obligatorio el cambio de Contraseña.</p>
+        <hr>
+        <h3 id="password1"></h3>
+        <h3 id="password2"></h3>
+        <h3 id="password3"></h3>
+        <h3 id="password4"></h3>
+        <h3 id="password5"></h3>
+        <h3 id="password6"></h3>
+        <h3 id="password7"></h3>
+        <h3 id="password8"></h3>
+        <h3 id="password9"></h3>
+        <hr>
+        <div class="row">
+            <a href="#" class="button" onclick="displayPasswords()">Generar</a>
+            <a href="#" class="button" onclick="generarPDF()">Descargar PDF</a>
+            <a href="index.html" class="button">Inicio</a>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+

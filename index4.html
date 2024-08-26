@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atento</title>
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            max-width: 500px;
+            margin: 20px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .button {
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        fieldset {
+            margin-bottom: 10px;
+        }
+
+        select,
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .row .button {
+            flex: 1 1 calc(33.33% - 10px); /* Ajuste para tres botones */
+        }
+    </style>
+</head>
+
+<body>
+ 
+
+    <div class="container">
+        <center>
+            <h1 class="mt-5">SISTEMA DE ENTREGA Y RECEPCIÓN DE MATERIAL</h1>
+        </center>
+        <br>
+
+        <form name="reporte" action="reporte4.php" method="post" autocomplete="off" id="reporteForm">
+            <fieldset>
+                <input id="field_11" name="field_11" placeholder="Nombre:" minlength="10" maxlength="40" type="text" tabindex="1" onkeyup="javascript:this.value=this.value.toUpperCase();" required autofocus>
+            </fieldset>
+            <br>
+
+            <table class="default">
+                <tr>
+                    <td>DNI-ID-NIE</td>
+                </tr>
+            </table>
+            <select id="field_02" name="field_02" tabindex="2">
+                <option value="DNI">DNI</option>
+                <option value="ID">ID</option>
+                <option value="NIE">NIE</option>
+            </select>
+            <br>
+
+            <fieldset>
+                <input id="field_22" name="field_22" placeholder="DNI-ID-NIE:" type="text" tabindex="2" value="" maxlength="12" minlength="5" onkeyup="javascript:this.value=this.value.toUpperCase();" required autofocus>
+            </fieldset>
+            <br>
+
+            <table class="default">
+                <tr>
+                    <td>EMPRESA</td>
+                </tr>
+            </table>
+            <select id="field_44" name="field_44" tabindex="3">
+                <option value="ATENTO TELESERVICIOS ESPAÑA, S.A.U.">ATENTO TELESERVICIOS ESPAÑA</option>
+                <option value="ATENTO SPAIN HOLDCO 6, S.A.U.">ATENTO SPAIN HOLDCO</option>
+            </select>
+            <br>
+
+            <table class="default">
+                <tr>
+                    <td>Portatil</td>
+                </tr>
+            </table>
+            <select id="field_33" name="field_33" tabindex="4" required>
+                <option value="">Selecciona opción</option>
+                <option value="HP 250 G7">HP 250 G7</option>
+                <option value="HP 255 G7">HP 255 G7</option>
+                <option value="HP 440 G5">HP 440 G5</option>
+                <option value="HP 445R G6">HP 445R G6</option>
+                <option value="HP 455 G7">HP 455 G7</option>
+                <option value="DELL 3410">DELL 3410</option>
+            </select>
+            <br>
+
+            <fieldset>
+                <input id="field_34" name="field_34" placeholder="Serial o Codigo:" type="text" tabindex="5" value="" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                <br>
+                <input id="field_35" name="field_35" placeholder="Hostname:" type="text" tabindex="6" value="" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                <br>
+                <input id="field_36" name="field_36" placeholder="Prestamo:" type="text" tabindex="7" value="" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+            </fieldset>
+            <br>
+
+            <div class="row">
+                <a href="#" class="button" onclick="generatePDF()">Descargar PDF</a>
+                <button type="reset" class="button">Borrar</button>
+                <a href="index.html" class="button">Inicio</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Obtener los valores del formulario
+            const nombre = document.getElementById('field_11').value;
+            const dni = document.getElementById('field_22').value;
+            const empresa = document.getElementById('field_44').value;
+            const portatil = document.getElementById('field_33').value;
+            const serial = document.getElementById('field_34').value;
+            const hostname = document.getElementById('field_35').value;
+            const prestamo = document.getElementById('field_36').value;
+
+            // Agregar contenido al PDF
+            doc.text("SISTEMA DE ENTREGA Y RECEPCIÓN DE MATERIAL", 20, 20);
+            doc.text(`Nombre: ${nombre}`, 20, 30);
+            doc.text(`DNI-ID-NIE: ${dni}`, 20, 40);
+            doc.text(`Empresa: ${empresa}`, 20, 50);
+            doc.text(`Portatil: ${portatil}`, 20, 60);
+            doc.text(`Serial o Código: ${serial}`, 20, 70);
+            doc.text(`Hostname: ${hostname}`, 20, 80);
+            doc.text(`Préstamo: ${prestamo}`, 20, 90);
+
+            // Guardar el PDF
+            doc.save("reporte.pdf");
+        }
+    </script>
+</body>
+
+</html>
+

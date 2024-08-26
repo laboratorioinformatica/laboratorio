@@ -24,7 +24,7 @@
         .container {
             background-color: #fff;
             max-width: 500px;
-            margin: 40px;
+            margin: 60px auto; /* Margen superior incrementado */
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -53,6 +53,9 @@
             background-color: #0056b3;
             transform: scale(1.05);
         }
+        .button i {
+            margin-right: 5px; /* Espacio entre el icono y el texto */
+        }
         fieldset {
             margin-bottom: 10px;
         }
@@ -76,7 +79,6 @@
     </style>
 </head>
 <body>
-  
 
     <!-- Inicio content -->  
     <div class="container"> 
@@ -135,9 +137,9 @@
             </fieldset>
             <br>
             <div class="row">
-                <a href="#" class="button" onclick="generatePDF()">Descargar PDF</a>
-                <button type="reset" class="button">Borrar</button>
-                <a href="index.html" class="button">Inicio</a>
+                <a href="#" class="button" onclick="generatePDF()"><i class="fas fa-download"></i> Descargar PDF</a>
+                <button type="reset" class="button"><i class="fas fa-eraser"></i> Borrar</button>
+                <a href="index.html" class="button"><i class="fas fa-home"></i> Inicio</a>
             </div>
         </form>
     </div>
@@ -174,5 +176,6 @@
     </script>
 </body>
 </html>
+
 
 

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Entrega y Recepción de Material</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
@@ -77,27 +78,23 @@
             margin-right: 5px;
         }
         #logo {
-            display: block;
-            margin: 0 auto 20px auto;
-            width: 255px;
-            height: 50px;
+            display: none; /* Ocultar la imagen en la vista previa HTML */
         }
     </style>
 </head>
 <body>
     <div class="container">
-       
         <h1>SISTEMA DE ENTREGA Y RECEPCIÓN DE MATERIAL</h1>
 
-        <form name="reporte" action="reporte4.php" method="post" autocomplete="off" id="reporteForm">
+        <form id="reporteForm">
             <div class="form-group">
                 <div class="column">
-                    <label for="field_11">Nombre:</label>
-                    <input id="field_11" name="field_11" minlength="10" maxlength="40" type="text" tabindex="1" onkeyup="javascript:this.value=this.value.toUpperCase();" required autofocus>
+                    <label for="field_01">Nombre:</label>
+                    <input id="field_01" name="field_01" minlength="10" maxlength="40" type="text" tabindex="1" onkeyup="toUpperCase(this);" required autofocus>
                 </div>
                 <div class="column">
-                    <label for="field_02">DNI-ID-NIE</label>
-                    <select id="field_02" name="field_02" tabindex="2">
+                    <label for="field_03">DNI-ID-NIE</label>
+                    <select id="field_03" name="field_03" tabindex="2">
                         <option value="DNI">DNI</option>
                         <option value="ID">ID</option>
                         <option value="NIE">NIE</option>
@@ -107,22 +104,12 @@
 
             <div class="form-group">
                 <div class="column">
-                    <label for="field_22">DNI-ID-NIE:</label>
-                    <input id="field_22" name="field_22" type="text" tabindex="3" maxlength="12" minlength="5" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                    <label for="field_02">DNI-ID-NIE:</label>
+                    <input id="field_02" name="field_02" type="text" tabindex="2" maxlength="12" minlength="5" onkeyup="toUpperCase(this);" required>
                 </div>
                 <div class="column">
-                    <label for="field_44">EMPRESA</label>
-                    <select id="field_44" name="field_44" tabindex="4">
-                        <option value="ATENTO TELESERVICIOS ESPAÑA, S.A.U.">ATENTO TELESERVICIOS ESPAÑA</option>
-                        <option value="ATENTO SPAIN HOLDCO 6, S.A.U.">ATENTO SPAIN HOLDCO</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="column">
-                    <label for="field_33">Portátil</label>
-                    <select id="field_33" name="field_33" tabindex="5" required>
+                    <label for="field_04">Portátil</label>
+                    <select id="field_04" name="field_04" tabindex="4" required>
                         <option value="">Selecciona opción</option>
                         <option value="HP 250 G7">HP 250 G7</option>
                         <option value="HP 255 G7">HP 255 G7</option>
@@ -132,56 +119,141 @@
                         <option value="DELL 3410">DELL 3410</option>
                     </select>
                 </div>
+            </div>
+
+            <div class="form-group">
                 <div class="column">
-                    <label for="field_34">Serial o Código</label>
-                    <input id="field_34" name="field_34" type="text" tabindex="6" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                    <label for="field_05">Serial o Código</label>
+                    <input id="field_05" name="field_05" type="text" tabindex="5" maxlength="30" minlength="2" onkeyup="toUpperCase(this);" required>
+                </div>
+                <div class="column">
+                    <label for="field_06">Hostname:</label>
+                    <input id="field_06" name="field_06" type="text" tabindex="6" maxlength="30" minlength="2" onkeyup="toUpperCase(this);" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="column">
-                    <label for="field_35">Hostname:</label>
-                    <input id="field_35" name="field_35" type="text" tabindex="7" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                    <label for="field_07">Préstamo:</label>
+                    <input id="field_07" name="field_07" type="text" tabindex="7" maxlength="30" minlength="2" onkeyup="toUpperCase(this);" required>
                 </div>
                 <div class="column">
-                    <label for="field_36">Préstamo:</label>
-                    <input id="field_36" name="field_36" type="text" tabindex="8" maxlength="30" minlength="2" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                    <label for="field_08">EMPRESA</label>
+                    <select id="field_08" name="field_08" tabindex="8">
+                        <option value="ATENTO TELESERVICIOS ESPAÑA, S.A.U.">ATENTO TELESERVICIOS ESPAÑA</option>
+                        <option value="ATENTO SPAIN HOLDCO 6, S.A.U.">ATENTO SPAIN HOLDCO</option>
+                    </select>
                 </div>
             </div>
 
             <div class="btn-group">
-                <a href="#" class="btn" onclick="generatePDF()"><i class="fas fa-download"></i> Descargar PDF</a>
+                <button type="button" class="btn" onclick="generatePDF()"><i class="fas fa-download"></i> Descargar PDF</button>
                 <button type="reset" class="btn"><i class="fas fa-eraser"></i> Borrar</button>
                 <a href="index.html" class="btn"><i class="fas fa-home"></i> Inicio</a>
             </div>
         </form>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
+        function toUpperCase(input) {
+            input.value = input.value.toUpperCase();
+        }
+
         function generatePDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
+            
+            var pageWidth = doc.internal.pageSize.getWidth(); 
+            var margin = 20; 
+            var contentWidth = pageWidth - 2 * margin; 
+            var x = margin; 
+            var y = 8; 
 
-            const nombre = document.getElementById('field_11').value;
-            const dni = document.getElementById('field_22').value;
-            const empresa = document.getElementById('field_44').value;
-            const portatil = document.getElementById('field_33').value;
-            const serial = document.getElementById('field_34').value;
-            const hostname = document.getElementById('field_35').value;
-            const prestamo = document.getElementById('field_36').value;
+            var img = document.getElementById('logo');
+            if (img) {
+                var imgData = img.src;
+                doc.addImage(imgData, 'PNG', margin, y, 40, 20); 
+                y += 20; // Espacio para la imagen y su margen
+            }
 
-            doc.text("SISTEMA DE ENTREGA Y RECEPCIÓN DE MATERIAL", 20, 20);
-            doc.text(`Nombre: ${nombre}`, 20, 30);
-            doc.text(`DNI-ID-NIE: ${dni}`, 20, 40);
-            doc.text(`Empresa: ${empresa}`, 20, 50);
-            doc.text(`Portátil: ${portatil}`, 20, 60);
-            doc.text(`Serial o Código: ${serial}`, 20, 70);
-            doc.text(`Hostname: ${hostname}`, 20, 80);
-            doc.text(`Préstamo: ${prestamo}`, 20, 90);
+            var saltoDeLinea = 7;
 
-            doc.save("reporte.pdf");
+            const nombres = document.getElementById('field_01').value;
+            const cedula = document.getElementById('field_03').value;
+            const numeracion = document.getElementById('field_02').value;
+            const equipamiento = document.getElementById('field_04').value;
+            const empresa = document.getElementById('field_08').value;
+
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const year = today.getFullYear();
+            const hours = String(today.getHours()).padStart(2, '0');
+            const minutes = String(today.getMinutes()).padStart(2, '0');
+            const seconds = String(today.getSeconds()).padStart(2, '0');
+
+            const currentDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+            
+            doc.setFontSize(10);
+            doc.text(currentDate, pageWidth - margin, y, { align: "right" });
+            
+            y += saltoDeLinea * 2; 
+
+            var mainTitle = "DOCUMENTO DE ENTREGA Y RECEPCION DE MATERIAL";
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold"); 
+            var titleWidth = doc.getTextWidth(mainTitle);
+            var titleX = (pageWidth - titleWidth) / 2;
+            doc.text(mainTitle, titleX, y);
+            y += saltoDeLinea * 2;
+            
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "normal");
+
+            doc.setFontSize(9);
+
+            var texto1 = `I.- El abajo firmante D./Dª. ${nombres}, provisto/a ${cedula} ${numeracion} (en adelante, el 'Empleado/a') manifiesta que es empleado/a de ${empresa} (en adelante, 'Atento').`;
+            var texto2 = "II.- Que Atento hace entrega al Empleado/a del equipamiento que se detalla a continuación para la correcta prestación del servicio al que está adscrito.";
+            var texto22 = "Equipamiento entregado:";
+            var texto222 = `-${equipamiento}`;
+  
+            var texto3 = "III.- Que el Empleado/a mediante la firma del presente documento acusa recibo del equipamiento descrito en el expositivo anterior.";
+            var texto4 = "IV.- Que el Empleado/a se obliga, bajo su responsabilidad, a custodiar y conservar el equipamiento entregado, a su cuidado, a darle un correcto uso y a utilizarlo única y exclusivamente para el desarrollo de su actividad laboral con Atento.";
+            var texto5 = "V.- El Empleado/a se obliga a devolver, cuando así le sea requerido por Atento, el equipamiento aquí detallado, en las mismas condiciones que le fue entregado y en el centro de trabajo asociado, en un plazo no superior a siete (7) días naturales. Pudiendo ser apercibido en caso de no hacerlo, instándose además las medidas legales que correspondan.";
+            var texto6 = "VI.- El Empleado/a exonera a Atento de cualquier deficiencia o desperfecto causado por un mal uso del equipamiento llevado a cabo por el Empleado/a, asumiendo el Empleado el coste del mantenimiento, reparación o reposición de los equipos afectados, siendo decisión de Atento la elección del proveedor o servicio técnico que tenga que llevar a cabo su reparación o sustitución.";
+            var texto7 = "VII.- En todo caso, cuando el Empleado/a cause baja en la empresa, deberá devolver el equipamiento aquí descrito, en las mismas condiciones que le fue entregado y en el centro de trabajo asociado, en un plazo no superior a siete (7) días naturales, procediéndose a adoptar las medidas legales oportunas en caso contrario.";
+
+            var textos = [texto1, texto2, texto22, texto222, texto3, texto4, texto5, texto6, texto7];
+
+            textos.forEach(function(texto, index) {
+                if (index === 2 || index === 3) { 
+                    doc.setFont("helvetica", "bold"); 
+                } else {
+                    doc.setFont("helvetica", "normal"); 
+                }
+                var lineas = doc.splitTextToSize(texto, contentWidth);
+                lineas.forEach(function(linea, idx) {
+                    var indent = 0;
+                    if (index === 2 || index === 3) {
+                        indent = 10; // Ajusta la indentación para los párrafos importantes
+                    }
+                    doc.text(linea, x + indent, y);
+                    y += saltoDeLinea;
+                });
+            });
+            
+            y += saltoDeLinea; 
+            doc.text(`Y para que así conste, suscriben el presente en Barcelona, a ${day}/${month}/${year}.`, x, y);
+             
+            y += saltoDeLinea * 2;
+
+            var firmasText = "Firma Empleado/a                      Firma Responsable Directo                        Firma Departamento IT";
+            doc.setFontSize(10);
+            doc.text(firmasText, x, y);
+            
+            doc.save(`${numeracion}.pdf`);
         }
     </script>
 </body>
 </html>
+

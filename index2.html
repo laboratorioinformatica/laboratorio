@@ -9,7 +9,7 @@
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-   <style>
+    <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f6f9;
@@ -118,26 +118,17 @@
 
     <!-- Inicio content -->  
     <div class="container"> 
-        <center>
-            <h1 class="mt-5">SISTEMA DE ENTREGA Y RECEPCIÓN DE MATERIAL</h1>
-        </center>
+        <h1 class="mt-5">SISTEMA DE ENTREGA Y RECEPCIÓN DE MATERIAL</h1>
         <form id="reporteForm" autocomplete="off">
-            <div class="form-row">
-                <div class="form-group">
-                    <fieldset>
-                        <input id="field_1" name="field_11" placeholder="Nombre:" size="20" minlength="5" maxlength="40" type="text" tabindex="1" onkeyup="this.value=this.value.toUpperCase();" title="Letras y números. Tamaño mínimo: 5. Tamaño máximo: 40" autofocus>
-                    </fieldset>
-                </div>
-                <div class="form-group">
-                    <fieldset>
-                        <input id="field_22" name="field_22" placeholder="DNI:" type="text" tabindex="2" maxlength="9" minlength="2" onkeyup="this.value=this.value.toUpperCase();" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" required>
-                    </fieldset>
-                </div>
-            </div>
-            <table class="default">
-                <tr>
-                    <td>Auricular</td>
-                    <td>
+            <div class="form-container">
+                <!-- Primera columna -->
+                <div class="form-column">
+                    <div class="form-group">
+                        <label for="field_1">Nombre:</label>
+                        <input id="field_1" name="field_11" size="20" minlength="5" maxlength="40" type="text" tabindex="1" onkeyup="this.value=this.value.toUpperCase();" title="Letras y números. Tamaño mínimo: 5. Tamaño máximo: 40" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="field_33">Auricular:</label>
                         <select id="field_33" name="field_33" tabindex="3">
                             <option value="">Selecciona opción</option>
                             <option value="Plantronics C3220USB">Plantronics C3220USB</option>
@@ -145,14 +136,20 @@
                             <option value="Plantronics Centralita">Plantronics Centralita</option>
                             <option value="Auricular Otros">Auricular Otros</option>
                         </select>
-                    </td>
-                </tr>
-            </table>
-            <br>
-            <table class="default">
-                <tr>
-                    <td>Portátil</td>
-                    <td>
+                    </div>
+                    <div class="form-group">
+                        <label for="field_4">Serial o Código:</label>
+                        <input id="field_4" name="field_34" type="text" tabindex="5" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
+                    </div>
+                </div>
+                <!-- Segunda columna -->
+                <div class="form-column">
+                    <div class="form-group">
+                        <label for="field_22">DNI:</label>
+                        <input id="field_22" name="field_22" type="text" tabindex="2" maxlength="9" minlength="2" onkeyup="this.value=this.value.toUpperCase();" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="field_44">Portátil:</label>
                         <select id="field_44" name="field_44" tabindex="4">
                             <option value="">Selecciona opción</option>
                             <option value="HP 250 G7">HP 250 G7</option>
@@ -162,26 +159,21 @@
                             <option value="HP 455 G7">HP 455 G7</option>
                             <option value="DELL 3410">DELL 3410</option>
                         </select>
-                    </td>
-                </tr>
-            </table>
-            <br>
-            <fieldset>
-                <input id="field_4" name="field_34" placeholder="Serial o Codigo:" type="text" tabindex="5" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
-            </fieldset>
-            <br>
-            <fieldset>
-                <input id="field_3" name="field_36" placeholder="Equipamiento entregado:" type="text" tabindex="6" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
-            </fieldset>
-            <br>
-            <fieldset>
-                <input id="field_3_2" name="field_35" placeholder="Equipamiento entregado 2:" type="text" tabindex="7" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
-            </fieldset>
-            <br>
-            <div class="button-container">
-                <a href="#" class="button" onclick="generatePDF()"><i class="fas fa-download"></i> Descargar PDF</a>
-                <button type="reset" class="button"><i class="fas fa-eraser"></i> Borrar</button>
-                <a href="index.html" class="button"><i class="fas fa-home"></i> Inicio</a>
+                    </div>
+                    <div class="form-group">
+                        <label for="field_3">Equipamiento entregado:</label>
+                        <input id="field_3" name="field_36" type="text" tabindex="6" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
+                    </div>
+                    <div class="form-group">
+                        <label for="field_3_2">Equipamiento entregado 2:</label>
+                        <input id="field_3_2" name="field_35" type="text" tabindex="7" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <a href="#" class="btn" onclick="generatePDF()"><i class="fas fa-download"></i> Descargar PDF</a>
+                <button type="reset" class="btn"><i class="fas fa-eraser"></i> Borrar</button>
+                <a href="index.html" class="btn"><i class="fas fa-home"></i> Inicio</a>
             </div>
         </form>
     </div>
@@ -218,6 +210,4 @@
     </script>
 </body>
 </html>
-
-
 

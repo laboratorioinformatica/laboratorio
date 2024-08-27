@@ -210,6 +210,12 @@
             const numerotlf = document.getElementById('field_06').value;
             const imei1 = document.getElementById('field_07').value;
             const imei2 = document.getElementById('field_08').value;
+
+            const prestamo1 = document.getElementById('field_09').value;
+            const prestamo2 = document.getElementById('field_10').value;
+            const prestamo3 = document.getElementById('field_12').value;
+            const prestamo4 = document.getElementById('field_13').value;
+            
             
             const empresa = document.getElementById('field_50').value;
 
@@ -249,6 +255,12 @@
             var texto2223 = `-Numero:${numerotlf}`;
             var texto2224 = `-IMEI 1:${imei1}`;
              var texto2225 = `-IMEI 2:${imei2}`;
+
+             var texto2226 = `-Prestamo:${prestamo1}`;
+             var texto2227 = `-Prestamo:${prestamo2}`;
+             var texto2228 = `-Prestamo:${prestamo3}`;
+             var texto2229 = `-Prestamo:${prestamo4}`;
+            
             
             
             
@@ -263,7 +275,7 @@
             var textos = [texto1, texto2, texto22, texto222, texto2222,texto2223,texto2224,texto2225, texto3, texto4, texto5, texto6, texto7];
 
            textos.forEach(function(texto, index) {
-                if (index === 2 || index === 3 || index === 4 || index === 5 || index === 6 || index === 7) { 
+                if (index === 2 || index === 3 || index === 4 || index === 5 || index === 6 || index === 7 || index === 8 || index === 9 || index === 10) { 
                     doc.setFont("helvetica", "bold"); 
                 } else {
                     doc.setFont("helvetica", "normal"); 
@@ -271,7 +283,7 @@
                 var lineas = doc.splitTextToSize(texto, contentWidth);
                 lineas.forEach(function(linea, idx) {
                     var indent = 0;
-                    if (index === 2 || index === 3 || index === 4 || index === 5 || index === 6 || index === 7) {
+                    if (index === 2 || index === 3 || index === 4 || index === 5 || index === 6 || index === 7) || index === 8 || index === 9 || index === 10 || index === 11 {
                         indent = 10; // Ajusta la indentación para los párrafos importantes
                     }
                     doc.text(linea, x + indent, y);

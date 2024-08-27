@@ -134,8 +134,8 @@
             var saltoDeLinea = 7;
 
             const nombres = document.getElementById('field_01').value;
-            const cedula = document.getElementById('field_03').value;
-            const numeracion = document.getElementById('field_02').value;
+            const cedula = document.getElementById('field_02').value;
+            const numeracion = document.getElementById('field_03').value;
             const equipamiento = document.getElementById('field_04').value;
             const prestamo = document.getElementById('field_07').value;
             
@@ -239,17 +239,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="field_02">DNI-ID-NIE</label>
+                        <label for="field_02">ID-DNI-NIE</label>
                         <select id="field_02" name="field_02">
-                            <option value="DNI">DNI</option>
                             <option value="ID">ID</option>
+                            <option value="DNI">DNI</option>
                             <option value="NIE">NIE</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="field_03">DNI/ID/NIE:</label>
-                        <input id="field_03" name="field_03" type="text" title="Introduzca un DNI/ID/NIE válido con números y letra."
+                        <label for="field_03">ID/DNI/NIE:</label>
+                        <input id="field_03" name="field_03" type="text" title="Introduzca un ID/DNI/NIE válido con números y letra."
                             pattern="(([A-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))|(([A-Z])([-]?)(\d{8}))"
                             maxlength="12" minlength="8" placeholder="DNI/ID/NIE"
                             onkeyup="javascript:this.value=this.value.toUpperCase();" required>

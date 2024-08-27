@@ -24,7 +24,6 @@
         .container {
             background-color: #fff;
             max-width: 500px;
-            margin: 20px;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -36,15 +35,44 @@
             color: #007bff;
         }
 
-        h3 {
+        p {
             text-align: center;
-            margin: 10px 0;
+            margin-bottom: 20px;
+        }
+
+        .password-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            justify-content: space-between;
+        }
+
+        .password-container h3 {
+            margin: 0;
+            font-size: 1.1em;
+            flex: 1;
+        }
+
+        .copy-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background-color: #0056b3;
         }
 
         .row {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
+            justify-content: center;
         }
 
         .button {
@@ -163,6 +191,15 @@
             doc.save("contraseñas_generadas.pdf");
         }
 
+        function copiarAlPortapapeles(id) {
+            const passwordText = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(passwordText).then(() => {
+                alert(`¡Contraseña copiada: ${passwordText}!`);
+            }).catch(err => {
+                alert('Error al copiar al portapapeles: ', err);
+            });
+        }
+
         window.onload = displayPasswords;
     </script>
 </head>
@@ -170,17 +207,44 @@
 <body>
     <div class="container">
         <h1>Generador de Contraseña</h1>
-        <p style="text-align: center;">La Contraseña es Temporal para el inicio de sesión, Es obligatorio el cambio de Contraseña.</p>
+        <p>La Contraseña es Temporal para el inicio de sesión, Es obligatorio el cambio de Contraseña.</p>
         <hr>
-        <h3 id="password1"></h3>
-        <h3 id="password2"></h3>
-        <h3 id="password3"></h3>
-        <h3 id="password4"></h3>
-        <h3 id="password5"></h3>
-        <h3 id="password6"></h3>
-        <h3 id="password7"></h3>
-        <h3 id="password8"></h3>
-        <h3 id="password9"></h3>
+        <div class="password-container">
+            <h3 id="password1"></h3>
+            <button class="copy-btn" onclick="copiarAlPortapapeles('password1')">Copiar</button>
+        </div>
+        <div class="password-container">
+            <h3 id="password2"></h3>
+            <button class="copy-btn" onclick="copiarAlPortapapeles('password2')">Copiar</button>
+        </div>
+        <div class="password-container">
+            <h3 id="password3"></h3>
+            <button class="copy-btn" onclick="copiarAlPortapapeles('password3')">Copiar</button>
+        </div>
+        <div class="password-container">
+            <h3 id="password4"></h3>
+            <button class="copy-btn" onclick="copiarAlPortapapeles('password4')">Copiar</button>
+        </div>
+        <div class="password-container">
+            <h3 id="password5"></h3>
+            <button class="copy-btn" onclick="copiarAlPortapapeles('password5')">Copiar</button>
+        </div>
+        <div class="password-container">
+            <h3 id="password6"></h3>
+            <button class="copy-btn" onclick="copiarAlPortapapeles('password6')">Copiar</button>
+        </div>
+        <div class="password-container">
+            <h3 id="password7"></h3>
+            <button class="copy-btn" onclick="copiarAlPortapapeles('password7')">Copiar</button>
+        </div>
+        <div class="password-container">
+            <h3 id="password8"></h3>
+            <button class="copy-btn" onclick="copiarAlPortapapeles('password8')">Copiar</button>
+        </div>
+        <div class="password-container">
+            <h3 id="password9"></h3>
+            <button class="copy-btn" onclick="copiarAlPortapapeles('password9')">Copiar</button>
+        </div>
         <hr>
         <div class="row">
             <a href="#" class="button" onclick="displayPasswords()"><i class="fas fa-sync-alt"></i>Generar</a>
@@ -191,6 +255,5 @@
 </body>
 
 </html>
-
 
 

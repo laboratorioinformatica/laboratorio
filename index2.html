@@ -9,7 +9,7 @@
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
+   <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f6f9;
@@ -21,7 +21,8 @@
             align-items: center;
             height: 100vh;
         }
-          .container {
+
+        .container {
             background-color: #fff;
             max-width: 1000px; /* Aumentado para dos columnas */
             margin: 0 auto; /* Centrando verticalmente con flex en el body */
@@ -29,68 +30,87 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         h1 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             color: #007bff;
         }
-        .button {
-            text-decoration: none;
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 15px;
-            border-radius: 5px;
-            display: inline-block;
-            font-weight: bold;
+
+        h3 {
             text-align: center;
-            width: 100%;
-            margin-bottom: 10px;
-            transition: background-color 0.3s, transform 0.2s;
-            border: none;
-            cursor: pointer;
+            margin-bottom: 30px;
+            color: #6c757d;
         }
-        .button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
+
+        .form-group {
+            margin-bottom: 15px;
         }
-        .button i {
-            margin-right: 5px; /* Espacio entre el icono y el texto */
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
-        fieldset {
-            margin-bottom: 10px;
-        }
-        select,
-        input[type="text"] {
+
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            border: 1px solid #ccc;
+            text-transform: uppercase;
         }
-        .form-row {
+
+        .btn-group {
             display: flex;
             justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 10px;
+            margin-top: 20px;
         }
-        .form-row .form-group {
+
+        .btn {
             flex: 1;
-            min-width: 0; /* Ensure content fits in the flex item */
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .form-row .form-group:nth-child(2) {
-            margin-left: 10px;
+
+        .btn:hover {
+            background-color: #0056b3;
         }
-        table.default {
-            width: 100%;
-            margin-bottom: 10px;
+
+        .btn i {
+            margin-right: 5px;
         }
-        table.default td {
-            padding: 5px;
+
+        #logo {
+            display: none;
         }
-        .button-container {
+
+        .form-container {
             display: flex;
             justify-content: space-between;
-            gap: 10px;
+        }
+
+        .form-container .form-column {
+            flex: 1;
+            margin: 0 10px; /* Espacio entre las dos columnas de formularios */
+        }
+
+        .form-container .form-column:first-child {
+            margin-left: 0; /* Eliminar margen izquierdo en la primera columna */
+        }
+
+        .form-container .form-column:last-child {
+            margin-right: 0; /* Eliminar margen derecho en la última columna */
         }
     </style>
 </head>

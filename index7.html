@@ -189,10 +189,8 @@
 
             var textos = [texto1, texto2, texto22, texto222, texto2222,texto2223, texto3, texto4, texto5, texto6, texto7];
 
-            textos.forEach(function(texto, index) {
-                if (index === 2 || index === 3) { 
-                    doc.setFont("helvetica", "bold"); 
-                } else if (index === 4 ) {
+           textos.forEach(function(texto, index) {
+                if (index === 2 || index === 3 || index === 4 || index === 5 || index === 6) { 
                     doc.setFont("helvetica", "bold"); 
                 } else {
                     doc.setFont("helvetica", "normal"); 
@@ -200,7 +198,7 @@
                 var lineas = doc.splitTextToSize(texto, contentWidth);
                 lineas.forEach(function(linea, idx) {
                     var indent = 0;
-                    if (index === 2 || index === 3 || index === 4) {
+                    if (index === 2 || index === 3 || index === 4 || index === 5 || index === 6) {
                         indent = 10; // Ajusta la indentación para los párrafos importantes
                     }
                     doc.text(linea, x + indent, y);

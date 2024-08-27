@@ -209,6 +209,7 @@
             const serial = document.getElementById('field_05').value;
             const numerotlf = document.getElementById('field_06').value;
             const imei1 = document.getElementById('field_07').value;
+            const imei2 = document.getElementById('field_08').value;
             
             const empresa = document.getElementById('field_50').value;
 
@@ -247,6 +248,7 @@
             var texto2222 = `-${serial}`;
             var texto2223 = `-${numerotlf}`;
             var texto2224 = `-${imei1}`;
+             var texto2225 = `-${imei2}`;
             
             
             
@@ -258,10 +260,10 @@
             var texto6 = "VI.- El Empleado/a exonera a Atento de cualquier deficiencia o desperfecto causado por un mal uso del equipamiento llevado a cabo por el Empleado/a, asumiendo el Empleado el coste del mantenimiento, reparación o reposición de los equipos afectados, siendo decisión de Atento la elección del proveedor o servicio técnico que tenga que llevar a cabo su reparación o sustitución.";
             var texto7 = "VII.- En todo caso, cuando el Empleado/a cause baja en la empresa, deberá devolver el equipamiento aquí descrito, en las mismas condiciones que le fue entregado y en el centro de trabajo asociado, en un plazo no superior a siete (7) días naturales, procediéndose a adoptar las medidas legales oportunas en caso contrario.";
 
-            var textos = [texto1, texto2, texto22, texto222, texto2222,texto2223,texto2224, texto3, texto4, texto5, texto6, texto7];
+            var textos = [texto1, texto2, texto22, texto222, texto2222,texto2223,texto2224,texto2225, texto3, texto4, texto5, texto6, texto7];
 
            textos.forEach(function(texto, index) {
-                if (index === 2 || index === 3 || index === 4 || index === 5 || index === 6) { 
+                if (index === 2 || index === 3 || index === 4 || index === 5 || index === 6 || index === 7) { 
                     doc.setFont("helvetica", "bold"); 
                 } else {
                     doc.setFont("helvetica", "normal"); 
@@ -269,7 +271,7 @@
                 var lineas = doc.splitTextToSize(texto, contentWidth);
                 lineas.forEach(function(linea, idx) {
                     var indent = 0;
-                    if (index === 2 || index === 3 || index === 4 || index === 5 || index === 6) {
+                    if (index === 2 || index === 3 || index === 4 || index === 5 || index === 6 || index === 7) {
                         indent = 10; // Ajusta la indentación para los párrafos importantes
                     }
                     doc.text(linea, x + indent, y);

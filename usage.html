@@ -36,21 +36,10 @@
         }
 
         p {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .password-container {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
-            justify-content: space-between;
-        }
-
-        .password-container h3 {
-            margin: 0;
-            font-size: 1.1em;
-            flex: 1;
+            margin-bottom: 20px;
+            color: #333;
         }
 
         .copy-btn {
@@ -66,6 +55,23 @@
 
         .copy-btn:hover {
             background-color: #0056b3;
+        }
+
+        .password-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            justify-content: space-between;
+        }
+
+        .password-container h3 {
+            margin: 0;
+            font-size: 1.1em;
+            flex: 1;
+        }
+
+        .copied {
+            color: #28a745; /* Color verde para indicar copiado */
         }
 
         .row {
@@ -194,7 +200,25 @@
         function copiarAlPortapapeles(id) {
             const passwordText = document.getElementById(id).innerText;
             navigator.clipboard.writeText(passwordText).then(() => {
+                document.getElementById(id).classList.add('copied');
                 alert(`¡Contraseña copiada: ${passwordText}!`);
+                setTimeout(() => {
+                    document.getElementById(id).classList.remove('copied');
+                }, 2000); // Cambia el color de vuelta después de 2 segundos
+            }).catch(err => {
+                alert('Error al copiar al portapapeles: ', err);
+            });
+        }
+
+        function copiarParrafo() {
+            const parrafo = document.getElementById('info-text');
+            const textToCopy = parrafo.innerText.replace('Copiar', '').trim(); // Elimina la palabra "Copiar" del texto a copiar
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                parrafo.classList.add('copied');
+                alert(`¡Texto copiado: ${textToCopy}!`);
+                setTimeout(() => {
+                    parrafo.classList.remove('copied');
+                }, 2000); // Cambia el color de vuelta después de 2 segundos
             }).catch(err => {
                 alert('Error al copiar al portapapeles: ', err);
             });
@@ -207,8 +231,11 @@
 <body>
     <div class="container">
         <h1>Generador de Contraseña</h1>
-        <p>La Contraseña es Temporal para el inicio de sesión, Es obligatorio el cambio de Contraseña.</p>
+        <p id="info-text">La Contraseña es Temporal para el inicio de sesión, Es obligatorio el cambio de Contraseña.
+            <button class="copy-btn" onclick="copiarParrafo()">Copiar</button>
+        </p>
         <hr>
+
         <div class="password-container">
             <h3 id="password1"></h3>
             <button class="copy-btn" onclick="copiarAlPortapapeles('password1')">Copiar</button>
@@ -245,6 +272,7 @@
             <h3 id="password9"></h3>
             <button class="copy-btn" onclick="copiarAlPortapapeles('password9')">Copiar</button>
         </div>
+
         <hr>
         <div class="row">
             <a href="#" class="button" onclick="displayPasswords()"><i class="fas fa-sync-alt"></i>Generar</a>
@@ -255,5 +283,3 @@
 </body>
 
 </html>
-
-

@@ -23,8 +23,8 @@
 
         .container {
             background-color: #fff;
-            max-width: 1000px; /* Aumentado para dos columnas */
-            margin: 0 auto; /* Centrando verticalmente con flex en el body */
+            max-width: 1000px;
+            margin: 0 auto;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -101,15 +101,15 @@
 
         .form-container .form-column {
             flex: 1;
-            margin: 0 10px; /* Espacio entre las dos columnas de formularios */
+            margin: 0 10px;
         }
 
         .form-container .form-column:first-child {
-            margin-left: 0; /* Eliminar margen izquierdo en la primera columna */
+            margin-left: 0;
         }
 
         .form-container .form-column:last-child {
-            margin-right: 0; /* Eliminar margen derecho en la última columna */
+            margin-right: 0;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -128,14 +128,26 @@
             doc.setFontSize(12);
             doc.setFont("helvetica", "normal");
 
-            const fields = ["field_11", "field_02", "field_22", "field_1", "field_2", "field_3", "field_4", "field_44"];
+            const fields = [
+                { id: "field_11", label: "Nombre" },
+                { id: "field_02", label: "DNI-ID-NIE" },
+                { id: "field_22", label: "DNI/ID/NIE" },
+                { id: "field_1", label: "Préstamos" },
+                { id: "field_2", label: "Préstamos 2" },
+                { id: "field_3", label: "Préstamos 3" },
+                { id: "field_4", label: "Préstamos 4" },
+                { id: "field_44", label: "Empresa" }
+            ];
+
             let y = 50;
 
-            fields.forEach(fieldId => {
-                const field = document.getElementById(fieldId);
-                const label = field.placeholder || field.previousElementSibling.textContent || field.name;
-                const value = field.value || field.options[field.selectedIndex].text;
-                doc.text(`${label}: ${value}`, 20, y);
+            fields.forEach(field => {
+                const fieldElement = document.getElementById(field.id);
+                const value = fieldElement.tagName === "SELECT" 
+                    ? fieldElement.options[fieldElement.selectedIndex].text 
+                    : fieldElement.value;
+
+                doc.text(`${field.label}: ${value}`, 20, y);
                 y += 10;
             });
 

@@ -181,8 +181,7 @@
     </div>
 
     <script src="dist/script.js"></script>
-   <script src="dist/script.js"></script>
-<script src="dist/script.js"></script>
+ <script src="dist/script.js"></script>
 <script>
     function generatePDF() {
         const { jsPDF } = window.jspdf;
@@ -297,8 +296,10 @@
             });
         });
 
-        y = Math.max(colYLeft, colYRight) + saltoDeLinea * 6; // Ajusta Y para añadir un salto de línea antes del siguiente texto
+        // Ajusta `y` para continuar después de las columnas sin espacio adicional
+        y = Math.max(colYLeft, colYRight);
 
+        // Añadir texto3 sin espacio adicional
         const remainingTexts = [texto3, texto4, texto5, texto6, texto7];
         remainingTexts.forEach(function(texto) {
             const lineas = doc.splitTextToSize(texto, contentWidth);
@@ -320,6 +321,8 @@
         doc.save(`${numeracion}.pdf`);
     }
 </script>
+
+
 
 
 </body>

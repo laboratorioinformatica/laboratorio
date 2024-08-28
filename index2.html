@@ -3,242 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Entrega y Recepción de Material</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <img alt="Atento" id="logo" src="logo.png" width="255" height="50">&nbsp;&nbsp;&nbsp;&nbsp;
+    <title>Sitio en Mantenimiento</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
         .container {
+            text-align: center;
+            padding: 20px;
             background-color: #fff;
-            max-width: 600px;
-            margin: 20px;
-            padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #007bff;
+            font-size: 2.5em;
+            color: #333;
         }
-        .form-group {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
+        p {
+            font-size: 1.2em;
+            color: #666;
         }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            width: 100%;
+        .loader {
+            margin: 20px auto;
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #3498db;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
         }
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            text-transform: uppercase;
-        }
-        .column {
-            width: 48%;
-        }
-        .btn-group {
-            display: flex;
-            justify-content: space-between;
-        }
-        .btn {
-            flex: 1;
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
-            transition: background-color 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-        .btn i {
-            margin-right: 5px;
-        }
-        #logo {
-            display: none; /* Ocultar la imagen en la vista previa HTML */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>SISTEMA DE ENTREGA Y RECEPCIÓN DE MATERIAL</h1>
-
-        <form id="reporteForm">
-            <div class="form-group">
-                <div class="column">
-                    <label for="field_01">Nombre:</label>
-                    <input id="field_01" name="field_01" minlength="10" maxlength="40" type="text" tabindex="1" onkeyup="toUpperCase(this);" required autofocus>
-                </div>
-                <div class="column">
-                    <label for="field_03">ID-DNI-NIE</label>
-                    <select id="field_03" name="field_03" tabindex="2">
-                        <option value="ID">ID</option>
-                        <option value="DNI">DNI</option>
-                        <option value="NIE">NIE</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="column">
-                    <label for="field_02">ID-DNI-NIE:</label>
-                    <input id="field_02" name="field_02" type="text" tabindex="2" maxlength="12" minlength="5" onkeyup="toUpperCase(this);" required>
-                </div>
-                <div class="column">
-                    <label for="field_04">Portátil</label>
-                    <select id="field_04" name="field_04" tabindex="4" required>
-                        <option value="">Selecciona opción</option>
-                        <option value="HP 250 G7">HP 250 G7</option>
-                        <option value="HP 255 G7">HP 255 G7</option>
-                        <option value="HP 440 G5">HP 440 G5</option>
-                        <option value="HP 445R G6">HP 445R G6</option>
-                        <option value="HP 455 G7">HP 455 G7</option>
-                        <option value="DELL 3410">DELL 3410</option>
-                        <option value="DELL 3440">DELL 3440</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="column">
-                    <label for="field_06">Préstamo1:</label>
-                    <input id="field_06" name="field_06" type="text" tabindex="6" maxlength="30" minlength="2" onkeyup="toUpperCase(this);" required>
-                </div>
-                <div class="column">
-                    <label for="field_07">Préstamo2:</label>
-                    <input id="field_07" name="field_07" type="text" tabindex="7" maxlength="30" minlength="2" onkeyup="toUpperCase(this);" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="column">
-                    <label for="field_08">EMPRESA</label>
-                    <select id="field_08" name="field_08" tabindex="8">
-                        <option value="ATENTO TELESERVICIOS ESPAÑA, S.A.U.">ATENTO TELESERVICIOS ESPAÑA</option>
-                        <option value="ATENTO SPAIN HOLDCO 6, S.A.U.">ATENTO SPAIN HOLDCO</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="btn-group">
-                <button type="button" class="btn" onclick="generatePDF()"><i class="fas fa-download"></i> Descargar PDF</button>
-                <button type="reset" class="btn"><i class="fas fa-eraser"></i> Borrar</button>
-                <a href="index.html" class="btn"><i class="fas fa-home"></i> Inicio</a>
-            </div>
-        </form>
+        <h1>Sitio en Mantenimiento</h1>
+        <p>Estamos trabajando para mejorar tu experiencia. Vuelve pronto.</p>
+        <div class="loader"></div>
     </div>
-
-    <script>
-        function toUpperCase(input) {
-            input.value = input.value.toUpperCase();
-        }
-
-        function generatePDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            var pageWidth = doc.internal.pageSize.getWidth(); 
-            var margin = 20; 
-            var contentWidth = pageWidth - 2 * margin; 
-            var x = margin; 
-            var y = 8; 
-
-            var img = document.getElementById('logo');
-            if (img) {
-                var imgData = img.src;
-                doc.addImage(imgData, 'PNG', margin, y, 40, 20); 
-                y += 20; // Espacio para la imagen y su margen
-            }
-
-            var saltoDeLinea = 5;
-
-            const nombres = document.getElementById('field_01').value;
-            const cedula = document.getElementById('field_03').value;
-            const numeracion = document.getElementById('field_02').value;
-            const equipamiento = document.getElementById('field_04').value;
-            const prestamo1 = document.getElementById('field_06').value;
-            const prestamo2 = document.getElementById('field_07').value;
-            const empresa = document.getElementById('field_08').value;
-
-            const today = new Date();
-            const day = String(today.getDate()).padStart(2, '0');
-            const month = String(today.getMonth() + 1).padStart(2, '0');
-            const year = today.getFullYear();
-            const hours = String(today.getHours()).padStart(2, '0');
-            const minutes = String(today.getMinutes()).padStart(2, '0');
-            const seconds = String(today.getSeconds()).padStart(2, '0');
-
-            const currentDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-            
-            doc.setFontSize(10);
-            doc.text(currentDate, pageWidth - margin, 15, { align: "right" });
-            
-            y += saltoDeLinea * 2; 
-
-            var mainTitle = "DOCUMENTO DE ENTREGA Y RECEPCION DE MATERIAL";
-            doc.setFontSize(12);
-            doc.setFont("helvetica", "bold"); 
-            var titleWidth = doc.getTextWidth(mainTitle);
-            var xTitle = (pageWidth - titleWidth) / 2;
-            doc.text(mainTitle, xTitle, y);
-
-            y += saltoDeLinea * 2; 
-
-            doc.setFont("helvetica", "normal"); 
-            doc.setFontSize(10);
-
-            var formData = [
-                `Nombre: ${nombres}`,
-                `${cedula}: ${numeracion}`,
-                `Portátil: ${equipamiento}`,
-                `Préstamo 1: ${prestamo1}`,
-                `Préstamo 2: ${prestamo2}`,
-                `Empresa: ${empresa}`
-            ];
-
-            formData.forEach(function (item) {
-                var lines = doc.splitTextToSize(item, contentWidth);
-                doc.text(lines, x, y);
-                y += saltoDeLinea * lines.length;
-            });
-
-            y += saltoDeLinea; 
-
-            doc.text("Recibe:", x, y);
-            y += saltoDeLinea * 3; 
-            doc.line(x, y, x + 60, y); 
-
-            y += saltoDeLinea * 3; 
-            doc.text("Entrega:", x, y);
-            y += saltoDeLinea * 3;
-            doc.line(x, y, x + 60, y);
-
-            doc.save("documento.pdf");
-        }
-    </script>
 </body>
 </html>

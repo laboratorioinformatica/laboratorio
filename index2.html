@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Reporte</title>
-    <!-- Bootstrap CSS -->
-    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome CSS -->
+    <title>Sistema de Entrega y Recepción de Material</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <img alt="Atento" id="logo" src="logo.png" width="255" height="50">&nbsp;&nbsp;&nbsp;&nbsp;
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -21,38 +19,30 @@
             align-items: center;
             height: 100vh;
         }
-
         .container {
             background-color: #fff;
-            max-width: 1000px; /* Aumentado para dos columnas */
-            margin: 0 auto; /* Centrando verticalmente con flex en el body */
+            max-width: 600px;
+            margin: 20px;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
         h1 {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             color: #007bff;
         }
-
-        h3 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #6c757d;
-        }
-
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
         }
-
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: bold;
+            width: 100%;
         }
-
         .form-group input,
         .form-group select {
             width: 100%;
@@ -61,13 +51,13 @@
             border-radius: 5px;
             text-transform: uppercase;
         }
-
+        .column {
+            width: 48%;
+        }
         .btn-group {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
         }
-
         .btn {
             flex: 1;
             background-color: #007bff;
@@ -76,142 +66,123 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin: 0 5px;
+            margin: 5px;
             transition: background-color 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
         .btn:hover {
             background-color: #0056b3;
         }
-
         .btn i {
             margin-right: 5px;
         }
-
         #logo {
-            display: none;
-        }
-
-        .form-container {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .form-container .form-column {
-            flex: 1;
-            margin: 0 10px; /* Espacio entre las dos columnas de formularios */
-        }
-
-        .form-container .form-column:first-child {
-            margin-left: 0; /* Eliminar margen izquierdo en la primera columna */
-        }
-
-        .form-container .form-column:last-child {
-            margin-right: 0; /* Eliminar margen derecho en la última columna */
+            display: none; /* Ocultar la imagen en la vista previa HTML */
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>SISTEMA DE ENTREGA Y RECEPCIÓN DE MATERIAL</h1>
 
-    <!-- Inicio content -->  
-    <div class="container"> 
-        <h1 class="mt-5">SISTEMA DE ENTREGA Y RECEPCIÓN DE MATERIAL</h1>
-        <form id="reporteForm" autocomplete="off">
-            <div class="form-container">
-                <!-- Primera columna -->
-                <div class="form-column">
-                    <div class="form-group">
-                        <label for="field_1">Nombre:</label>
-                        <input id="field_1" name="field_11" size="20" minlength="5" maxlength="40" type="text" tabindex="1" onkeyup="this.value=this.value.toUpperCase();" title="Letras y números. Tamaño mínimo: 5. Tamaño máximo: 40" autofocus>
-                    </div>
-                    <div class="form-group">
-                        <label for="field_33">Auricular:</label>
-                        <select id="field_33" name="field_33" tabindex="3">
-                            <option value="">Selecciona opción</option>
-                            <option value="Plantronics C3220USB">Plantronics C3220USB</option>
-                            <option value="Accutone ZE-UB210">Accutone ZE-UB210</option>
-                            <option value="Plantronics Centralita">Plantronics Centralita</option>
-                            <option value="Auricular Otros">Auricular Otros</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="field_4">Serial o Código:</label>
-                        <input id="field_4" name="field_34" type="text" tabindex="5" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
-                    </div>
+        <form id="reporteForm">
+            <div class="form-group">
+                <div class="column">
+                    <label for="field_01">Nombre:</label>
+                    <input id="field_01" name="field_01" minlength="10" maxlength="40" type="text" tabindex="1" onkeyup="toUpperCase(this);" required autofocus>
                 </div>
-                <!-- Segunda columna -->
-                <div class="form-column">
-                    <div class="form-group">
-                        <label for="field_22">DNI:</label>
-                        <input id="field_22" name="field_22" type="text" tabindex="2" maxlength="9" minlength="2" onkeyup="this.value=this.value.toUpperCase();" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="field_44">Portátil:</label>
-                        <select id="field_44" name="field_44" tabindex="4">
-                            <option value="">Selecciona opción</option>
-                            <option value="HP 250 G7">HP 250 G7</option>
-                            <option value="HP 255 G7">HP 255 G7</option>
-                            <option value="HP 440 G5">HP 440 G5</option>
-                            <option value="HP 445R G6">HP 445R G6</option>
-                            <option value="HP 455 G7">HP 455 G7</option>
-                            <option value="DELL 3410">DELL 3410</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="field_3">Equipamiento entregado:</label>
-                        <input id="field_3" name="field_36" type="text" tabindex="6" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
-                    </div>
-                    <div class="form-group">
-                        <label for="field_3_2">Equipamiento entregado 2:</label>
-                        <input id="field_3_2" name="field_35" type="text" tabindex="7" maxlength="30" minlength="2" onkeyup="this.value=this.value.toUpperCase();">
-                    </div>
+                <div class="column">
+                    <label for="field_03">ID-DNI-NIE</label>
+                    <select id="field_03" name="field_03" tabindex="2">
+                        <option value="ID">ID</option>
+                        <option value="DNI">DNI</option>
+                        <option value="NIE">NIE</option>
+                    </select>
                 </div>
             </div>
+
+            <div class="form-group">
+                <div class="column">
+                    <label for="field_02">ID-DNI-NIE:</label>
+                    <input id="field_02" name="field_02" type="text" tabindex="2" maxlength="12" minlength="5" onkeyup="toUpperCase(this);" required>
+                </div>
+                <div class="column">
+                    <label for="field_04">Portátil</label>
+                    <select id="field_04" name="field_04" tabindex="4" required>
+                        <option value="">Selecciona opción</option>
+                        <option value="HP 250 G7">HP 250 G7</option>
+                        <option value="HP 255 G7">HP 255 G7</option>
+                        <option value="HP 440 G5">HP 440 G5</option>
+                        <option value="HP 445R G6">HP 445R G6</option>
+                        <option value="HP 455 G7">HP 455 G7</option>
+                        <option value="DELL 3410">DELL 3410</option>
+                        <option value="DELL 3440">DELL 3440</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="column">
+                    <label for="field_06">Préstamo1:</label>
+                    <input id="field_06" name="field_06" type="text" tabindex="6" maxlength="30" minlength="2" onkeyup="toUpperCase(this);" required>
+                </div>
+                <div class="column">
+                    <label for="field_07">Préstamo2:</label>
+                    <input id="field_07" name="field_07" type="text" tabindex="7" maxlength="30" minlength="2" onkeyup="toUpperCase(this);" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="column">
+                    <label for="field_08">EMPRESA</label>
+                    <select id="field_08" name="field_08" tabindex="8">
+                        <option value="ATENTO TELESERVICIOS ESPAÑA, S.A.U.">ATENTO TELESERVICIOS ESPAÑA</option>
+                        <option value="ATENTO SPAIN HOLDCO 6, S.A.U.">ATENTO SPAIN HOLDCO</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="btn-group">
-                <a href="#" class="btn" onclick="generatePDF()"><i class="fas fa-download"></i> Descargar PDF</a>
+                <button type="button" class="btn" onclick="generatePDF()"><i class="fas fa-download"></i> Descargar PDF</button>
                 <button type="reset" class="btn"><i class="fas fa-eraser"></i> Borrar</button>
                 <a href="index.html" class="btn"><i class="fas fa-home"></i> Inicio</a>
             </div>
         </form>
     </div>
 
-    <!-- jsPDF library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-   <script>
+    <script>
+        function toUpperCase(input) {
+            input.value = input.value.toUpperCase();
+        }
+
         function generatePDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
+            
+            var pageWidth = doc.internal.pageSize.getWidth(); 
+            var margin = 20; 
+            var contentWidth = pageWidth - 2 * margin; 
+            var x = margin; 
+            var y = 8; 
 
-            const pageWidth = doc.internal.pageSize.getWidth();
-            const margin = 20;
-            const contentWidth = pageWidth - 2 * margin;
-            const x = margin;
-            let y = 8;
-
-            const img = document.getElementById('logo');
+            var img = document.getElementById('logo');
             if (img) {
-                const imgData = img.src;
-                doc.addImage(imgData, 'PNG', margin, y, 40, 20);
-                y += 20;
+                var imgData = img.src;
+                doc.addImage(imgData, 'PNG', margin, y, 40, 20); 
+                y += 20; // Espacio para la imagen y su margen
             }
 
-            const saltoDeLinea = 5;
+            var saltoDeLinea = 5;
 
             const nombres = document.getElementById('field_01').value;
-            const cedula = document.getElementById('field_02').value;
-            const numeracion = document.getElementById('field_03').value;
-            const modelo = document.getElementById('field_04').value;
-            const serial = document.getElementById('field_05').value;
-            const numerotlf = document.getElementById('field_06').value;
-            const imei1 = document.getElementById('field_07').value;
-            const imei2 = document.getElementById('field_08').value;
-            const prestamo1 = document.getElementById('field_10').value;
-            const prestamo2 = document.getElementById('field_11').value;
-            const prestamo3 = document.getElementById('field_12').value;
-            const empresa = document.getElementById('field_50').value;
+            const cedula = document.getElementById('field_03').value;
+            const numeracion = document.getElementById('field_02').value;
+            const equipamiento = document.getElementById('field_04').value;
+            const prestamo1 = document.getElementById('field_06').value;
+            const prestamo2 = document.getElementById('field_07').value;
+            const empresa = document.getElementById('field_08').value;
 
             const today = new Date();
             const day = String(today.getDate()).padStart(2, '0');
@@ -222,115 +193,52 @@
             const seconds = String(today.getSeconds()).padStart(2, '0');
 
             const currentDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-
+            
             doc.setFontSize(10);
-           // doc.text(currentDate, pageWidth - margin, y, { align: "right" });
-             doc.text(currentDate, pageWidth - margin, 15, { align: "right" });
+            doc.text(currentDate, pageWidth - margin, 15, { align: "right" });
+            
+            y += saltoDeLinea * 2; 
 
-            y += saltoDeLinea;
-
-            const mainTitle = "DOCUMENTO DE ENTREGA Y RECEPCION DE MATERIAL";
+            var mainTitle = "DOCUMENTO DE ENTREGA Y RECEPCION DE MATERIAL";
             doc.setFontSize(12);
-            doc.setFont("helvetica", "bold");
-            const titleWidth = doc.getTextWidth(mainTitle);
-            const titleX = (pageWidth - titleWidth) / 2;
-            doc.text(mainTitle, titleX, y);
-            y += saltoDeLinea * 2;
+            doc.setFont("helvetica", "bold"); 
+            var titleWidth = doc.getTextWidth(mainTitle);
+            var xTitle = (pageWidth - titleWidth) / 2;
+            doc.text(mainTitle, xTitle, y);
 
-            doc.setFontSize(14);
-            doc.setFont("helvetica", "normal");
+            y += saltoDeLinea * 2; 
 
-            doc.setFontSize(9);
-
-            const texto1 = `I.- El abajo firmante D./Dª. ${nombres}, provisto/a ${cedula} ${numeracion} (en adelante, el 'Empleado/a') manifiesta que es empleado/a de ${empresa} (en adelante, 'Atento').\n`;
-            const texto2 = `II.- Que Atento hace entrega al Empleado/a del equipamiento que se detalla a continuación para la correcta prestación del servicio al que está adscrito.\n`;
-            const texto22 = "Equipamiento entregado:";
-            const texto222 = `-Modelo: ${modelo}`;
-            const texto2222 = `-Serial: ${serial}`;
-            const texto2223 = `-Numero: ${numerotlf}`;
-            const texto2224 = `-IMEI 1: ${imei1}`;
-            const texto2225 = `-IMEI 2: ${imei2}`;
-            const texto2226 = `-Préstamo: ${prestamo1}`;
-            const texto2227 = `-Préstamo: ${prestamo2}`;
-            const texto2228 = `-Préstamo: ${prestamo3}\n`;
-            const texto3 = `III.- Que el Empleado/a mediante la firma del presente documento acusa recibo del equipamiento descrito en el expositivo anterior.\n`;
-            const texto4 = `IV.- Que el Empleado/a se obliga, bajo su responsabilidad, a custodiar y conservar el equipamiento entregado, a su cuidado, a darle un correcto uso y a utilizarlo única y exclusivamente para el desarrollo de su actividad laboral con Atento.\n`;
-            const texto5 = `V.- El Empleado/a se obliga a devolver, cuando así le sea requerido por Atento, el equipamiento aquí detallado, en las mismas condiciones que le fue entregado y en el centro de trabajo asociado, en un plazo no superior a siete (7) días naturales. Pudiendo ser apercibido en caso de no hacerlo, instándose además las medidas legales que correspondan.\n`;
-            const texto6 = `VI.- El Empleado/a exonera a Atento de cualquier deficiencia o desperfecto causado por un mal uso del equipamiento llevado a cabo por el Empleado/a, asumiendo el Empleado el coste del mantenimiento, reparación o reposición de los equipos afectados, siendo decisión de Atento la elección del proveedor o servicio técnico que tenga que llevar a cabo su reparación o sustitución.\n`;
-            const texto7 = `VII.- En todo caso, cuando el Empleado/a cause baja en la empresa, deberá devolver el equipamiento aquí descrito, en las mismas condiciones que le fue entregado y en el centro de trabajo asociado, en un plazo no superior a siete (7) días naturales, procediéndose a adoptar las medidas legales oportunas en caso contrario.`;
-
-            // Set the font for the main body text
-            doc.setFontSize(9);
-            doc.setFont("helvetica", "normal");
-
-            // Render normal text
-            const textos = [texto1, texto2];
-            textos.forEach(function(texto) {
-                const lineas = doc.splitTextToSize(texto, contentWidth);
-                lineas.forEach(function(linea) {
-                    doc.text(linea, x, y);
-                    y += saltoDeLinea;
-                });
-            });
-
-            // Set font to bold for specific texts including "Equipamiento entregado:"
-            doc.setFont("helvetica", "bold");
-            doc.text(texto22, x, y);
-            y += saltoDeLinea;
-
-            // Draw the two columns for the requested texts
-            const colLeftX = x; // Position X for the first column
-            const colRightX = x + contentWidth / 2; // Position X for the second column
-            let colYLeft = y;
-            let colYRight = y;
-
-            const columnLeftTexts = [texto222, texto2224, texto2223, texto2226];
-            const columnRightTexts = [texto2222, texto2225, texto2227, texto2228];
-
-            columnLeftTexts.forEach(function(texto) {
-                const lineas = doc.splitTextToSize(texto, contentWidth / 2 - 10);
-                lineas.forEach(function(linea) {
-                    doc.text(linea, colLeftX, colYLeft);
-                    colYLeft += saltoDeLinea;
-                });
-            });
-
-            columnRightTexts.forEach(function(texto) {
-                const lineas = doc.splitTextToSize(texto, contentWidth / 2 - 10);
-                lineas.forEach(function(linea) {
-                    doc.text(linea, colRightX, colYRight);
-                    colYRight += saltoDeLinea;
-                });
-            });
-
-            // Reset font to normal after the bold texts
-            doc.setFont("helvetica", "normal");
-
-            // No add extra line break here
-            y = Math.max(colYLeft, colYRight);
-
-            // Render remaining text
-            const remainingTexts = [texto3, texto4, texto5, texto6, texto7];
-            remainingTexts.forEach(function(texto) {
-                const lineas = doc.splitTextToSize(texto, contentWidth);
-                lineas.forEach(function(linea) {
-                    doc.text(linea, x, y);
-                    y += saltoDeLinea * 1.2; // Adjust line spacing for remaining texts
-                });
-            });
-
-            y += saltoDeLinea;
-            doc.text(`Y para que así conste, suscriben el presente en Barcelona, a ${day}/${month}/${year}.`, x, y);
-
-            y += saltoDeLinea * 2;
-
-            const firmasText = "Firma Empleado/a                      Firma Responsable Directo                        Firma Departamento IT";
+            doc.setFont("helvetica", "normal"); 
             doc.setFontSize(10);
-            doc.text(firmasText, x, y);
 
-            doc.save(`${numeracion}.pdf`);
+            var formData = [
+                `Nombre: ${nombres}`,
+                `${cedula}: ${numeracion}`,
+                `Portátil: ${equipamiento}`,
+                `Préstamo 1: ${prestamo1}`,
+                `Préstamo 2: ${prestamo2}`,
+                `Empresa: ${empresa}`
+            ];
+
+            formData.forEach(function (item) {
+                var lines = doc.splitTextToSize(item, contentWidth);
+                doc.text(lines, x, y);
+                y += saltoDeLinea * lines.length;
+            });
+
+            y += saltoDeLinea; 
+
+            doc.text("Recibe:", x, y);
+            y += saltoDeLinea * 3; 
+            doc.line(x, y, x + 60, y); 
+
+            y += saltoDeLinea * 3; 
+            doc.text("Entrega:", x, y);
+            y += saltoDeLinea * 3;
+            doc.line(x, y, x + 60, y);
+
+            doc.save("documento.pdf");
         }
     </script>
 </body>
 </html>
-

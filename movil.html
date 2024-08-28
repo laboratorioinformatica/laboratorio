@@ -182,6 +182,7 @@
 
     <script src="dist/script.js"></script>
    <script src="dist/script.js"></script>
+<script src="dist/script.js"></script>
 <script>
     function generatePDF() {
         const { jsPDF } = window.jspdf;
@@ -296,7 +297,7 @@
             });
         });
 
-        y = Math.max(colYLeft, colYRight) + 10; // Ajusta Y para continuar el texto después de las columnas
+        y = Math.max(colYLeft, colYRight) + saltoDeLinea * 6; // Ajusta Y para añadir un salto de línea antes del siguiente texto
 
         const remainingTexts = [texto3, texto4, texto5, texto6, texto7];
         remainingTexts.forEach(function(texto) {
@@ -319,6 +320,7 @@
         doc.save(`${numeracion}.pdf`);
     }
 </script>
+
 
 </body>
 

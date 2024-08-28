@@ -181,7 +181,6 @@
     </div>
 
     <script src="dist/script.js"></script>
-<script src="dist/script.js"></script>
 <script>
     function generatePDF() {
         const { jsPDF } = window.jspdf;
@@ -262,6 +261,10 @@
         const texto6 = "VI.- El Empleado/a exonera a Atento de cualquier deficiencia o desperfecto causado por un mal uso del equipamiento llevado a cabo por el Empleado/a, asumiendo el Empleado el coste del mantenimiento, reparación o reposición de los equipos afectados, siendo decisión de Atento la elección del proveedor o servicio técnico que tenga que llevar a cabo su reparación o sustitución.";
         const texto7 = "VII.- En todo caso, cuando el Empleado/a cause baja en la empresa, deberá devolver el equipamiento aquí descrito, en las mismas condiciones que le fue entregado y en el centro de trabajo asociado, en un plazo no superior a siete (7) días naturales, procediéndose a adoptar las medidas legales oportunas en caso contrario.";
 
+        // Set the font for the main body text
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
+
         const textos = [texto1, texto2, texto22];
         textos.forEach(function(texto) {
             const lineas = doc.splitTextToSize(texto, contentWidth);
@@ -271,14 +274,17 @@
             });
         });
 
-        // Dibuja las dos columnas para los textos solicitados
-        const colLeftX = x; // Ajusta la posición X de la primera columna
-        const colRightX = x + contentWidth / 2; // Ajusta la posición X de la segunda columna
+        // Draw the two columns for the requested texts
+        const colLeftX = x; // Position X for the first column
+        const colRightX = x + contentWidth / 2; // Position X for the second column
         let colYLeft = y;
         let colYRight = y;
 
         const columnLeftTexts = [texto222, texto2224, texto2223, texto2228];
         const columnRightTexts = [texto2222, texto2225, texto2227, texto2229];
+
+        // Set font to bold for the specified texts
+        doc.setFont("helvetica", "bold");
 
         columnLeftTexts.forEach(function(texto) {
             const lineas = doc.splitTextToSize(texto, contentWidth / 2 - 10);
@@ -296,7 +302,10 @@
             });
         });
 
-        // No añadir salto de línea extra aquí
+        // Reset font to normal after the bold texts
+        doc.setFont("helvetica", "normal");
+
+        // No add extra line break here
         y = Math.max(colYLeft, colYRight);
 
         const remainingTexts = [texto3, texto4, texto5, texto6, texto7];
@@ -304,7 +313,7 @@
             const lineas = doc.splitTextToSize(texto, contentWidth);
             lineas.forEach(function(linea) {
                 doc.text(linea, x, y);
-                y += saltoDeLinea * 1.2; // Ajuste del salto de línea para los textos restantes
+                y += saltoDeLinea * 1.2; // Adjust line spacing for remaining texts
             });
         });
 
@@ -320,6 +329,7 @@
         doc.save(`${numeracion}.pdf`);
     }
 </script>
+
 
 
 

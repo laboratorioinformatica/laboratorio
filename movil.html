@@ -265,7 +265,8 @@
         doc.setFontSize(9);
         doc.setFont("helvetica", "normal");
 
-        const textos = [texto1, texto2, texto22];
+        // Render normal text
+        const textos = [texto1, texto2];
         textos.forEach(function(texto) {
             const lineas = doc.splitTextToSize(texto, contentWidth);
             lineas.forEach(function(linea) {
@@ -273,6 +274,11 @@
                 y += saltoDeLinea;
             });
         });
+
+        // Set font to bold for specific texts including "Equipamiento entregado:"
+        doc.setFont("helvetica", "bold");
+        doc.text(texto22, x, y);
+        y += saltoDeLinea;
 
         // Draw the two columns for the requested texts
         const colLeftX = x; // Position X for the first column
@@ -282,9 +288,6 @@
 
         const columnLeftTexts = [texto222, texto2224, texto2223, texto2228];
         const columnRightTexts = [texto2222, texto2225, texto2227, texto2229];
-
-        // Set font to bold for the specified texts
-        doc.setFont("helvetica", "bold");
 
         columnLeftTexts.forEach(function(texto) {
             const lineas = doc.splitTextToSize(texto, contentWidth / 2 - 10);
@@ -308,6 +311,7 @@
         // No add extra line break here
         y = Math.max(colYLeft, colYRight);
 
+        // Render remaining text
         const remainingTexts = [texto3, texto4, texto5, texto6, texto7];
         remainingTexts.forEach(function(texto) {
             const lineas = doc.splitTextToSize(texto, contentWidth);
@@ -329,6 +333,7 @@
         doc.save(`${numeracion}.pdf`);
     }
 </script>
+
 
 
 

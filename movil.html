@@ -224,7 +224,8 @@
             const currentDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
 
             doc.setFontSize(10);
-            doc.text(currentDate, pageWidth - margin, y, { align: "right" });
+           // doc.text(currentDate, pageWidth - margin, y, { align: "right" });
+             doc.text(currentDate, pageWidth - margin, 15, { align: "right" });
 
             y += saltoDeLinea;
 

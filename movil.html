@@ -181,123 +181,149 @@
     </div>
 
     <script src="dist/script.js"></script>
-    <script>
-        function generatePDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            var pageWidth = doc.internal.pageSize.getWidth(); 
-            var margin = 20; 
-            var contentWidth = pageWidth - 2 * margin; 
-            var x = margin; 
-            var y = 8; 
+<script>
+    function generatePDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        const pageWidth = doc.internal.pageSize.getWidth(); 
+        const margin = 20; 
+        const contentWidth = pageWidth - 2 * margin; 
+        const x = margin; 
+        let y = 8; 
 
-            var img = document.getElementById('logo');
-            if (img) {
-                var imgData = img.src;
-                doc.addImage(imgData, 'PNG', margin, y, 40, 20); 
-                y += 20; // Espacio para la imagen y su margen
-            }
-
-            var saltoDeLinea = 7;
-
-            const nombres = document.getElementById('field_01').value;
-            const cedula = document.getElementById('field_02').value;
-            const numeracion = document.getElementById('field_03').value;
-            
-            const modelo = document.getElementById('field_04').value;
-            const serial = document.getElementById('field_05').value;
-            const numerotlf = document.getElementById('field_06').value;
-            const imei1 = document.getElementById('field_07').value;
-            const imei2 = document.getElementById('field_08').value;
-
-            const prestamo1 = document.getElementById('field_09').value;
-            const prestamo2 = document.getElementById('field_10').value;
-            const prestamo3 = document.getElementById('field_12').value;
-            const prestamo4 = document.getElementById('field_13').value;
-            
-            
-            const empresa = document.getElementById('field_50').value;
-
-            const today = new Date();
-            const day = String(today.getDate()).padStart(2, '0');
-            const month = String(today.getMonth() + 1).padStart(2, '0');
-            const year = today.getFullYear();
-            const hours = String(today.getHours()).padStart(2, '0');
-            const minutes = String(today.getMinutes()).padStart(2, '0');
-            const seconds = String(today.getSeconds()).padStart(2, '0');
-
-            const currentDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-            
-            doc.setFontSize(10);
-            doc.text(currentDate, pageWidth - margin, y, { align: "right" });
-            
-            y += saltoDeLinea * 2; 
-
-            var mainTitle = "DOCUMENTO DE ENTREGA Y RECEPCION DE MATERIAL";
-            doc.setFontSize(12);
-            doc.setFont("helvetica", "bold"); 
-            var titleWidth = doc.getTextWidth(mainTitle);
-            var titleX = (pageWidth - titleWidth) / 2;
-            doc.text(mainTitle, titleX, y);
-            y += saltoDeLinea * 2;
-            
-            doc.setFontSize(14);
-            doc.setFont("helvetica", "normal");
-
-            doc.setFontSize(9);
-
-            var texto1 = `I.- El abajo firmante D./Dª. ${nombres}, provisto/a ${cedula} ${numeracion} (en adelante, el 'Empleado/a') manifiesta que es empleado/a de ${empresa} (en adelante, 'Atento').`;
-            var texto2 = "II.- Que Atento hace entrega al Empleado/a del equipamiento que se detalla a continuación para la correcta prestación del servicio al que está adscrito.";
-            var texto22 = "Equipamiento entregado:";
-            var texto222 = `-Modelo:${modelo}`;
-            var texto2222 = `-Serial:${serial}`;
-            var texto2223 = `-Numero:${numerotlf}`;
-            var texto2224 = `-IMEI 1:${imei1}`;
-             var texto2225 = `-IMEI 2:${imei2}`;
-
-             var texto2226 = `-Prestamo:${prestamo1}`;
-             var texto2227 = `-Prestamo:${prestamo2}`;
-             var texto2228 = `-Prestamo:${prestamo3}`;
-             var texto2229 = `-Prestamo:${prestamo4}`;
-  
-            var texto3 = "III.- Que el Empleado/a mediante la firma del presente documento acusa recibo del equipamiento descrito en el expositivo anterior.";
-            var texto4 = "IV.- Que el Empleado/a se obliga, bajo su responsabilidad, a custodiar y conservar el equipamiento entregado, a su cuidado, a darle un correcto uso y a utilizarlo única y exclusivamente para el desarrollo de su actividad laboral con Atento.";
-            var texto5 = "V.- El Empleado/a se obliga a devolver, cuando así le sea requerido por Atento, el equipamiento aquí detallado, en las mismas condiciones que le fue entregado y en el centro de trabajo asociado, en un plazo no superior a siete (7) días naturales. Pudiendo ser apercibido en caso de no hacerlo, instándose además las medidas legales que correspondan.";
-            var texto6 = "VI.- El Empleado/a exonera a Atento de cualquier deficiencia o desperfecto causado por un mal uso del equipamiento llevado a cabo por el Empleado/a, asumiendo el Empleado el coste del mantenimiento, reparación o reposición de los equipos afectados, siendo decisión de Atento la elección del proveedor o servicio técnico que tenga que llevar a cabo su reparación o sustitución.";
-            var texto7 = "VII.- En todo caso, cuando el Empleado/a cause baja en la empresa, deberá devolver el equipamiento aquí descrito, en las mismas condiciones que le fue entregado y en el centro de trabajo asociado, en un plazo no superior a siete (7) días naturales, procediéndose a adoptar las medidas legales oportunas en caso contrario.";
-
-            var textos = [texto1, texto2, texto22, texto222, texto2222, texto2223, texto2224, texto2225, texto2226 ,texto2227 ,texto2228 ,texto2229, texto3, texto4, texto5, texto6, texto7];
-
-           textos.forEach(function(texto, index) {
-                if (index === 2 || index === 3 || index === 4 || index === 5 || index === 6 || index === 7 || index === 8 || index === 9 || index === 10) { 
-                    doc.setFont("helvetica", "bold"); 
-                } else {
-                    doc.setFont("helvetica", "normal"); 
-                }
-                var lineas = doc.splitTextToSize(texto, contentWidth);
-                lineas.forEach(function(linea, idx) {
-                    var indent = 0;
-                    if (index === 2 || index === 3 || index === 4 || index === 5 || index === 6 || index === 7 || index === 8 || index === 9 || index === 10 || index === 11) {
-                        indent = 10; // Ajusta la indentación para los párrafos importantes
-                    }
-                    doc.text(linea, x + indent, y);
-                    y += saltoDeLinea;
-                });
-            });
-            
-            y += saltoDeLinea; 
-            doc.text(`Y para que así conste, suscriben el presente en Barcelona, a ${day}/${month}/${year}.`, x, y);
-             
-            y += saltoDeLinea * 2;
-
-            var firmasText = "Firma Empleado/a                      Firma Responsable Directo                        Firma Departamento IT";
-            doc.setFontSize(10);
-            doc.text(firmasText, x, y);
-            
-            doc.save(`${numeracion}.pdf`);
+        const img = document.getElementById('logo');
+        if (img) {
+            const imgData = img.src;
+            doc.addImage(imgData, 'PNG', margin, y, 40, 20); 
+            y += 20; // Espacio para la imagen y su margen
         }
-    </script>
+
+        const saltoDeLinea = 7;
+
+        const nombres = document.getElementById('field_01').value;
+        const cedula = document.getElementById('field_02').value;
+        const numeracion = document.getElementById('field_03').value;
+        
+        const modelo = document.getElementById('field_04').value;
+        const serial = document.getElementById('field_05').value;
+        const numerotlf = document.getElementById('field_06').value;
+        const imei1 = document.getElementById('field_07').value;
+        const imei2 = document.getElementById('field_08').value;
+
+        const prestamo1 = document.getElementById('field_09').value;
+        const prestamo2 = document.getElementById('field_10').value;
+        const prestamo3 = document.getElementById('field_12').value;
+        const prestamo4 = document.getElementById('field_13').value;
+        
+        const empresa = document.getElementById('field_50').value;
+
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const year = today.getFullYear();
+        const hours = String(today.getHours()).padStart(2, '0');
+        const minutes = String(today.getMinutes()).padStart(2, '0');
+        const seconds = String(today.getSeconds()).padStart(2, '0');
+
+        const currentDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+        
+        doc.setFontSize(10);
+        doc.text(currentDate, pageWidth - margin, y, { align: "right" });
+        
+        y += saltoDeLinea * 2; 
+
+        const mainTitle = "DOCUMENTO DE ENTREGA Y RECEPCION DE MATERIAL";
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold"); 
+        const titleWidth = doc.getTextWidth(mainTitle);
+        const titleX = (pageWidth - titleWidth) / 2;
+        doc.text(mainTitle, titleX, y);
+        y += saltoDeLinea * 2;
+        
+        doc.setFontSize(14);
+        doc.setFont("helvetica", "normal");
+
+        doc.setFontSize(9);
+
+        const texto1 = `I.- El abajo firmante D./Dª. ${nombres}, provisto/a ${cedula} ${numeracion} (en adelante, el 'Empleado/a') manifiesta que es empleado/a de ${empresa} (en adelante, 'Atento').`;
+        const texto2 = "II.- Que Atento hace entrega al Empleado/a del equipamiento que se detalla a continuación para la correcta prestación del servicio al que está adscrito.";
+        const texto22 = "Equipamiento entregado:";
+        const texto222 = `-Modelo: ${modelo}`;
+        const texto2222 = `-Serial: ${serial}`;
+        const texto2223 = `-Numero: ${numerotlf}`;
+        const texto2224 = `-IMEI 1: ${imei1}`;
+        const texto2225 = `-IMEI 2: ${imei2}`;
+
+        const texto2226 = `-Préstamo: ${prestamo1}`;
+        const texto2227 = `-Préstamo: ${prestamo2}`;
+        const texto2228 = `-Préstamo: ${prestamo3}`;
+        const texto2229 = `-Préstamo: ${prestamo4}`;
+
+        const texto3 = "III.- Que el Empleado/a mediante la firma del presente documento acusa recibo del equipamiento descrito en el expositivo anterior.";
+        const texto4 = "IV.- Que el Empleado/a se obliga, bajo su responsabilidad, a custodiar y conservar el equipamiento entregado, a su cuidado, a darle un correcto uso y a utilizarlo única y exclusivamente para el desarrollo de su actividad laboral con Atento.";
+        const texto5 = "V.- El Empleado/a se obliga a devolver, cuando así le sea requerido por Atento, el equipamiento aquí detallado, en las mismas condiciones que le fue entregado y en el centro de trabajo asociado, en un plazo no superior a siete (7) días naturales. Pudiendo ser apercibido en caso de no hacerlo, instándose además las medidas legales que correspondan.";
+        const texto6 = "VI.- El Empleado/a exonera a Atento de cualquier deficiencia o desperfecto causado por un mal uso del equipamiento llevado a cabo por el Empleado/a, asumiendo el Empleado el coste del mantenimiento, reparación o reposición de los equipos afectados, siendo decisión de Atento la elección del proveedor o servicio técnico que tenga que llevar a cabo su reparación o sustitución.";
+        const texto7 = "VII.- En todo caso, cuando el Empleado/a cause baja en la empresa, deberá devolver el equipamiento aquí descrito, en las mismas condiciones que le fue entregado y en el centro de trabajo asociado, en un plazo no superior a siete (7) días naturales, procediéndose a adoptar las medidas legales oportunas en caso contrario.";
+
+        const textos = [texto1, texto2, texto22, texto222, texto2222, texto2223];
+        textos.forEach(function(texto) {
+            const lineas = doc.splitTextToSize(texto, contentWidth);
+            lineas.forEach(function(linea) {
+                doc.text(linea, x, y);
+                y += saltoDeLinea;
+            });
+        });
+
+        // Dibuja las dos columnas para los textos solicitados
+        const colLeftX = x; // Ajusta la posición X de la primera columna
+        const colRightX = x + contentWidth / 2; // Ajusta la posición X de la segunda columna
+        let colYLeft = y + saltoDeLinea;
+        let colYRight = y + saltoDeLinea;
+
+        const columnLeftTexts = [texto2224, texto2226, texto2228];
+        const columnRightTexts = [texto2225, texto2227, texto2229];
+
+        columnLeftTexts.forEach(function(texto) {
+            const lineas = doc.splitTextToSize(texto, contentWidth / 2 - 10);
+            lineas.forEach(function(linea) {
+                doc.text(linea, colLeftX, colYLeft);
+                colYLeft += saltoDeLinea;
+            });
+        });
+
+        columnRightTexts.forEach(function(texto) {
+            const lineas = doc.splitTextToSize(texto, contentWidth / 2 - 10);
+            lineas.forEach(function(linea) {
+                doc.text(linea, colRightX, colYRight);
+                colYRight += saltoDeLinea;
+            });
+        });
+
+        y = Math.max(colYLeft, colYRight) + 10; // Ajusta Y para continuar el texto después de las columnas
+
+        const remainingTexts = [texto3, texto4, texto5, texto6, texto7];
+        remainingTexts.forEach(function(texto) {
+            const lineas = doc.splitTextToSize(texto, contentWidth);
+            lineas.forEach(function(linea) {
+                doc.text(linea, x, y);
+                y += saltoDeLinea;
+            });
+        });
+        
+        y += saltoDeLinea; 
+        doc.text(`Y para que así conste, suscriben el presente en Barcelona, a ${day}/${month}/${year}.`, x, y);
+         
+        y += saltoDeLinea * 2;
+
+        const firmasText = "Firma Empleado/a                      Firma Responsable Directo                        Firma Departamento IT";
+        doc.setFontSize(10);
+        doc.text(firmasText, x, y);
+        
+        doc.save(`${numeracion}.pdf`);
+    }
+</script>
+
 </body>
 
 </html>

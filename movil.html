@@ -283,7 +283,7 @@
                 const lineas = doc.splitTextToSize(texto, contentWidth / 2 - 10);
                 lineas.forEach(function(linea) {
                     doc.text(linea, colLeftX, colYLeft);
-                  //  colYLeft += saltoDeLinea;
+                    colYLeft += saltoDeLinea;
                 });
             });
 
@@ -291,7 +291,7 @@
                 const lineas = doc.splitTextToSize(texto, contentWidth / 2 - 10);
                 lineas.forEach(function(linea) {
                     doc.text(linea, colRightX, colYRight);
-                  //  colYRight += saltoDeLinea;
+                   colYRight += saltoDeLinea;
                 });
             });
 

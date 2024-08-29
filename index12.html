@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas de Clases</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Alinea el contenedor al inicio de la vista */
+            height: 100vh;
+            overflow: auto; /* Permite el desplazamiento si el contenido se desborda */
+        }
+        .container {
+            background-color: #fff;
+            max-width: 1200px;
+            width: 100%; /* Asegura que el contenedor ocupe el ancho completo */
+            margin: 60px auto 20px; /* Margen superior para el espacio en la parte superior y márgenes automáticos para centrar horizontalmente */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .main-title {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #007bff;
+            font-size: 2rem;
+        }
+        .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 1.25rem;
+        }
+        .columns {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .column {
+            width: 48%;
+        }
+        .class-container {
+            margin-bottom: 30px;
+            padding: 25px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            height: 400px;
+            box-sizing: border-box; /* Incluye el padding en el ancho total */
+        }
+        .class-container h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+            text-align: center;
+            font-size: 1.75rem;
+        }
+        .class-container textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+            min-height: 250px;
+            font-size: 18px;
+            box-sizing: border-box; /* Incluye el padding en el ancho total */
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-title">Sistema de Notas</div>
+        <div class="subtitle">Organiza tus cosas y toma notas de manera eficiente</div>
+        <div class="columns">
+            <div class="column">
+                <div class="class-container">
+                    <h2>Jaime</h2>
+                    <textarea placeholder="Escribe tus notas aquí..."></textarea>
+                    <div class="btn-group">
+                        <button class="btn"><i class="fas fa-save"></i>Guardar</button>
+                        <button class="btn"><i class="fas fa-trash-alt"></i>Borrar</button>
+                    </div>
+                </div>
+                <div class="class-container">
+                    <h2>Oscar</h2>
+                    <textarea placeholder="Escribe tus notas aquí..."></textarea>
+                    <div class="btn-group">
+                        <button class="btn"><i class="fas fa-save"></i>Guardar</button>
+                        <button class="btn"><i class="fas fa-trash-alt"></i>Borrar</button>
+                    </div>
+                </div>
+                <div class="class-container">
+                    <h2>Adria</h2>
+                    <textarea placeholder="Escribe tus notas aquí..."></textarea>
+                    <div class="btn-group">
+                        <button class="btn"><i class="fas fa-save"></i>Guardar</button>
+                        <button class="btn"><i class="fas fa-trash-alt"></i>Borrar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="class-container">
+                    <h2>Nelson</h2>
+                    <textarea placeholder="Escribe tus notas aquí..."></textarea>
+                    <div class="btn-group">
+                        <button class="btn"><i class="fas fa-save"></i>Guardar</button>
+                        <button class="btn"><i class="fas fa-trash-alt"></i>Borrar</button>
+                    </div>
+                </div>
+                <div class="class-container">
+                    <h2>Anonimous</h2>
+                    <textarea placeholder="Escribe tus notas aquí..."></textarea>
+                    <div class="btn-group">
+                        <button class="btn"><i class="fas fa-save"></i>Guardar</button>
+                        <button class="btn"><i class="fas fa-trash-alt"></i>Borrar</button>
+                    </div>
+                </div>
+                <div class="class-container">
+                    <h2>Anonimous2</h2>
+                    <textarea placeholder="Escribe tus notas aquí..."></textarea>
+                    <div class="btn-group">
+                        <button class="btn"><i class="fas fa-save"></i>Guardar</button>
+                        <button class="btn"><i class="fas fa-trash-alt"></i>Borrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

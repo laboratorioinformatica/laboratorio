@@ -33,5 +33,5 @@ app.post('/submit', (req, res) => {
 
 // Iniciar el servidor
 app.listen(port, () => {
-    console.log(`Servidor escuchando en http://localhost:${port}`);
+    console.log(`Servidor escuchando en http://10.100.74.6:${port}`);
 });

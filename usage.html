@@ -71,7 +71,7 @@
         }
 
         .copied {
-            color: #28a745; /* Color verde para indicar copiado */
+            color: #28a745;
         }
 
         .row {
@@ -105,78 +105,54 @@
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <script>
-        function passwordGenerate(chars) {
-            const data = '1234567890****';
-            return data.split('').sort(() => Math.random() - 0.5).join('').substring(0, chars);
+        // Lista de países
+const countries = [
+    "Argentina", "Australia", "Afganistan", "ArabiaSaudita", "Azerbaiyan", 
+    "Bangladesh", "Barbados", "BosniaHerzegovina", "Botswana", "Camboya", 
+    "Camerun", "CostaRica", "Dominicana", "ElSalvador", "Guatemala", 
+    "Honduras", "Indonesia", "Kazajistan", "Kirguistan", "Luxemburgo", 
+    "Madagascar", "Malasia", "Mauritania", "Moldavia", "Montenegro", 
+    "Mozambique", "Nicaragua", "NuevaZelanda", "PapuaNuevaGuinea", 
+    "Paraguay", "Portugal", "Sudafrica", "SudanDelSur", "Tanzania", 
+    "Tayikistan", "Turkmenistan", "Uzbekistan", "Venezuela", "Zimbabue", 
+    "Filipinas", "GuineaEcuatorial", "AntiguaBarbuda", "Azerbaiyan", 
+    "Bangladesh", "Botswana", "BurkinaFaso", "Camboya", "Eslovenia", 
+    "Mauritania", "Kazajistan", "Turkmenistan"
+];
+
+
+
+        // Función para seleccionar un país aleatorio
+        function getRandomCountry() {
+            return countries[Math.floor(Math.random() * countries.length)];
         }
 
+        // Función para generar contraseñas aleatorias
         function generatePassword(length) {
-            const pattern = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890@";
-            let key = "";
+            const charset = "0123456789!@#*+";
+			//const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+            let password = "";
             for (let i = 0; i < length; i++) {
-                key += pattern.charAt(Math.floor(Math.random() * pattern.length));
-            }
-            return key;
-        }
-
-        function generatePasswordd(length) {
-            const pattern = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890@.";
-            let key = "";
-            for (let i = 0; i < length; i++) {
-                key += pattern.charAt(Math.floor(Math.random() * pattern.length));
-            }
-            return key;
-        }
-
-        function generatePassworddd(length) {
-            const pattern = "1234567890";
-            let key = "";
-            for (let i = 0; i < length; i++) {
-                key += pattern.charAt(Math.floor(Math.random() * pattern.length));
-            }
-            return key;
-        }
-
-        function generatePasswordsd(length) {
-            const pattern = "1234567890";
-            let key = "";
-            for (let i = 0; i < length; i++) {
-                key += pattern.charAt(Math.floor(Math.random() * pattern.length));
-            }
-            return key;
-        }
-
-        function randomPassword() {
-            const length = 10;
-            return Math.random().toString(36).slice(-length);
-        }
-
-        function generarPasswordComplejo(length) {
-            const base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#%^&*()_,./<>?;:[]{}\\|=+';
-            let password = '';
-            for (let i = 0; i < length; i++) {
-                password += base.charAt(Math.floor(Math.random() * base.length));
+                password += charset.charAt(Math.floor(Math.random() * charset.length));
             }
             return password;
         }
 
-        function _generarPasswd() {
-            const cadena = Math.random().toString(36).substr(2) + new Date().getTime().toString(36);
-            const inicio = Math.floor(Math.random() * (cadena.length - 9));
-            return cadena.substr(inicio, 64);
-        }
-
         function displayPasswords() {
-            document.getElementById('password1').innerText = "Atento2024*" + generatePassworddd(4);
-            document.getElementById('password2').innerText = "Atento2024." + generatePassworddd(2);
-            document.getElementById('password3').innerText = "At3nto*" + passwordGenerate(6);
-            document.getElementById('password4').innerText = generatePassword(8);
-            document.getElementById('password5').innerText = "Atento*" + generatePasswordd(16);
-            document.getElementById('password6').innerText = "**At3nto**" + generatePasswordsd(2);
-            document.getElementById('password7').innerText = randomPassword();
-            document.getElementById('password8').innerText = _generarPasswd();
-            document.getElementById('password9').innerText = generarPasswordComplejo(10);
+            const country = getRandomCountry(); // Obtener un país aleatorio
+
+            // Asegurarse de que todas las contraseñas tengan al menos 12 caracteres
+            document.getElementById('password1').innerText = country + "" + generatePassword(2);
+            document.getElementById('password2').innerText = country + "" + generatePassword(3);
+            document.getElementById('password3').innerText = country + "" + generatePassword(4);
+            document.getElementById('password4').innerText = generatePassword(12);
+            document.getElementById('password5').innerText = country + "" + generatePassword(4);
+            document.getElementById('password6').innerText = "" + country + "**" + generatePassword(4);
+            document.getElementById('password7').innerText = generatePassword(12);
+            document.getElementById('password8').innerText = generatePassword(12);
+            document.getElementById('password9').innerText = generatePassword(12);
         }
 
         function generarPDF() {
@@ -204,7 +180,7 @@
                 alert(`¡Contraseña copiada: ${passwordText}!`);
                 setTimeout(() => {
                     document.getElementById(id).classList.remove('copied');
-                }, 2000); // Cambia el color de vuelta después de 2 segundos
+                }, 2000);
             }).catch(err => {
                 alert('Error al copiar al portapapeles: ', err);
             });
@@ -212,13 +188,13 @@
 
         function copiarParrafo() {
             const parrafo = document.getElementById('info-text');
-            const textToCopy = parrafo.innerText.replace('Copiar', '').trim(); // Elimina la palabra "Copiar" del texto a copiar
+            const textToCopy = parrafo.innerText.replace('Copiar', '').trim();
             navigator.clipboard.writeText(textToCopy).then(() => {
                 parrafo.classList.add('copied');
                 alert(`¡Texto copiado: ${textToCopy}!`);
                 setTimeout(() => {
                     parrafo.classList.remove('copied');
-                }, 2000); // Cambia el color de vuelta después de 2 segundos
+                }, 2000);
             }).catch(err => {
                 alert('Error al copiar al portapapeles: ', err);
             });

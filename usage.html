@@ -128,13 +128,16 @@ const countries = [
         function getRandomCountry() {
             return countries[Math.floor(Math.random() * countries.length)];
         }
- function generatePasswordsd2(length) {
-            const pattern = "1234567890";
-            let key = "";
+
+	          // Función para generar contraseñas aleatorias
+        function generatePassword2(length) {
+            const charset = "0123456789!@#*+";
+			//const charset = "0123456789";
+            let password = "";
             for (let i = 0; i < length; i++) {
-                key += pattern.charAt(Math.floor(Math.random() * pattern.length));
+                password += charset.charAt(Math.floor(Math.random() * charset.length));
             }
-            return key;
+            return password;
         }
 	    
 

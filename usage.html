@@ -129,9 +129,9 @@ const countries = [
             return countries[Math.floor(Math.random() * countries.length)];
         }
 
-	          // Función para generar contraseñas aleatorias
+	          // Función para generar contraseñas aleatorias solo numeros
         function generatePassword2(length) {
-            const charset = "0123456789!@#*+";
+            const charset = "0123456789";
 			//const charset = "0123456789";
             let password = "";
             for (let i = 0; i < length; i++) {

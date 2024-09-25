@@ -267,7 +267,19 @@
                 });
             });
 
- 
+  y += saltoDeLinea * 2;
+    var middle = (contentWidth) / 2 + margin; // Punto central de la página
+
+    doc.setFont("helvetica", "bold");
+    doc.text("Equipamiento entregado:", x, y);
+    y += saltoDeLinea * 2;
+
+    columnLeft.forEach(function (texto, index) {
+        doc.text(texto, x, y);
+        doc.text(columnRight[index], middle, y); // Añadir la columna derecha
+        y += saltoDeLinea;
+    });
+
             
             y += saltoDeLinea; 
             doc.text(`Y para que así conste, suscriben el presente en Barcelona, a ${day}/${month}/${year}.`, x, y);

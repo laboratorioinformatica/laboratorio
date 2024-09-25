@@ -261,6 +261,15 @@
                     y += saltoDeLinea;
                 });
             });
+
+   // Ahora imprimimos en dos columnas
+    doc.text(texto222, col1X, y);
+    doc.text(texto2234, col2X, y);
+    y += saltoDeLinea;
+
+    doc.text(texto2233, col1X, y);
+    doc.text(texto2222, col2X, y);
+    y += saltoDeLinea * 2;
             
             y += saltoDeLinea; 
             doc.text(`Y para que así conste, suscriben el presente en Barcelona, a ${day}/${month}/${year}.`, x, y);

@@ -192,6 +192,9 @@
             const cedula = document.getElementById('field_03').value;
             const numeracion = document.getElementById('field_02').value;
             const equipamiento = document.getElementById('field_04').value;
+             const serial = document.getElementById('field_05').value;
+             const hostname = document.getElementById('field_06').value;
+            
             const prestamo = document.getElementById('field_07').value;
             
             const empresa = document.getElementById('field_08').value;
@@ -228,6 +231,9 @@
             var texto2 = "II.- Que Atento hace entrega al Empleado/a del equipamiento que se detalla a continuación para la correcta prestación del servicio al que está adscrito.\n";
             var texto22 = "Equipamiento entregado:";
             var texto222 = `-${equipamiento}`;
+            var texto2233 = `-${serial}`;
+            var texto2234 = `-${hostname}`;
+            
              var texto2222 = `-${prestamo}\n`;
             
             var texto3 = "III.- Que el Empleado/a mediante la firma del presente documento acusa recibo del equipamiento descrito en el expositivo anterior.\n";
@@ -236,7 +242,7 @@
             var texto6 = "VI.- El Empleado/a exonera a Atento de cualquier deficiencia o desperfecto causado por un mal uso del equipamiento llevado a cabo por el Empleado/a, asumiendo el Empleado el coste del mantenimiento, reparación o reposición de los equipos afectados, siendo decisión de Atento la elección del proveedor o servicio técnico que tenga que llevar a cabo su reparación o sustitución.\n";
             var texto7 = "VII.- En todo caso, cuando el Empleado/a cause baja en la empresa, deberá devolver el equipamiento aquí descrito, en las mismas condiciones que le fue entregado y en el centro de trabajo asociado, en un plazo no superior a siete (7) días naturales, procediéndose a adoptar las medidas legales oportunas en caso contrario.\n";
 
-            var textos = [texto1, texto2, texto22, texto222, texto2222, texto3, texto4, texto5, texto6, texto7];
+            var textos = [texto1, texto2, texto22, texto222, texto2233, texto2234, texto2222, texto3, texto4, texto5, texto6, texto7];
 
             textos.forEach(function(texto, index) {
                 if (index === 2 || index === 3) { 

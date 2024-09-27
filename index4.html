@@ -241,39 +241,75 @@
             var texto6 = "VI.- El Empleado/a exonera a Atento de cualquier deficiencia o desperfecto causado por un mal uso del equipamiento llevado a cabo por el Empleado/a, asumiendo el Empleado el coste del mantenimiento, reparación o reposición de los equipos afectados, siendo decisión de Atento la elección del proveedor o servicio técnico que tenga que llevar a cabo su reparación o sustitución.\n";
             var texto7 = "VII.- En todo caso, cuando el Empleado/a cause baja en la empresa, deberá devolver el equipamiento aquí descrito, en las mismas condiciones que le fue entregado y en el centro de trabajo asociado, en un plazo no superior a siete (7) días naturales, procediéndose a adoptar las medidas legales oportunas en caso contrario.\n";
 
-            var textos = [texto1, texto2, texto22, texto222, texto2234, texto2233, texto2222, texto3, texto4, texto5, texto6, texto7];
+           // Set the font for the main body text
+            doc.setFontSize(9);
+            doc.setFont("helvetica", "normal");
 
-            textos.forEach(function(texto, index) {
-                if (index === 2 || index === 3 || index === 4 || index === 5) { 
-                    doc.setFont("helvetica", "bold"); 
-                } else if (index === 6 ) {
-                    doc.setFont("helvetica", "bold"); 
-                } else {
-                    doc.setFont("helvetica", "normal"); 
-                }
-                var lineas = doc.splitTextToSize(texto, contentWidth);
-                lineas.forEach(function(linea, idx) {
-                    var indent = 0;
-                    if (index === 2 || index === 3 || index === 4 || index === 5 || index === 6) {
-                        indent = 10; // Ajusta la indentación para los párrafos importantes
-                    }
-                    doc.text(linea, x + indent, y);
+            // Render normal text
+            const textos = [texto1, texto2];
+            textos.forEach(function(texto) {
+                const lineas = doc.splitTextToSize(texto, contentWidth);
+                lineas.forEach(function(linea) {
+                    doc.text(linea, x, y);
                     y += saltoDeLinea;
                 });
             });
 
+            // Set font to bold for specific texts including "Equipamiento entregado:"
+            doc.setFont("helvetica", "bold");
+            doc.text(texto22, x, y);
+            y += saltoDeLinea;
 
+            // Draw the two columns for the requested texts
+            const colLeftX = x; // Position X for the first column
+            const colRightX = x + contentWidth / 2; // Position X for the second column
+            let colYLeft = y;
+            let colYRight = y;
 
-            
-            y += saltoDeLinea; 
+            const columnLeftTexts = [texto222, texto2224, texto2223, texto2226];
+            const columnRightTexts = [texto2222, texto2225, texto2227, texto2228];
+
+            columnLeftTexts.forEach(function(texto) {
+                const lineas = doc.splitTextToSize(texto, contentWidth / 2 - 10);
+                lineas.forEach(function(linea) {
+                    doc.text(linea, colLeftX, colYLeft);
+                    colYLeft += saltoDeLinea;
+                });
+            });
+
+            columnRightTexts.forEach(function(texto) {
+                const lineas = doc.splitTextToSize(texto, contentWidth / 2 - 10);
+                lineas.forEach(function(linea) {
+                    doc.text(linea, colRightX, colYRight);
+                    colYRight += saltoDeLinea;
+                });
+            });
+
+            // Reset font to normal after the bold texts
+            doc.setFont("helvetica", "normal");
+
+            // No add extra line break here
+            y = Math.max(colYLeft, colYRight);
+
+            // Render remaining text
+            const remainingTexts = [texto3, texto4, texto5, texto6, texto7];
+            remainingTexts.forEach(function(texto) {
+                const lineas = doc.splitTextToSize(texto, contentWidth);
+                lineas.forEach(function(linea) {
+                    doc.text(linea, x, y);
+                    y += saltoDeLinea * 1.2; // Adjust line spacing for remaining texts
+                });
+            });
+
+            y += saltoDeLinea;
             doc.text(`Y para que así conste, suscriben el presente en Barcelona, a ${day}/${month}/${year}.`, x, y);
-             
+
             y += saltoDeLinea * 2;
 
-            var firmasText = "Firma Empleado/a                      Firma Responsable Directo                        Firma Departamento IT";
+            const firmasText = "Firma Empleado/a                      Firma Responsable Directo                        Firma Departamento IT";
             doc.setFontSize(10);
             doc.text(firmasText, x, y);
-            
+
             doc.save(`${numeracion}.pdf`);
         }
     </script>

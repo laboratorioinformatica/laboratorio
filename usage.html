@@ -156,8 +156,9 @@ const countries = [
             const country = getRandomCountry(); // Obtener un país aleatorio
 
             // Asegurarse de que todas las contraseñas tengan al menos 12 caracteres
-             document.getElementById('password0').innerText = "4T3n70@2024*" + generatePassword2(2);
-	     document.getElementById('password1').innerText = country + "" + generatePassword(2);
+	    document.getElementById('password00').innerText = "At3nto@2024*" + generatePassword2(2);
+            document.getElementById('password0').innerText = "4T3n70@2024*" + generatePassword2(2);
+	    document.getElementById('password1').innerText = country + "" + generatePassword(2);
             document.getElementById('password2').innerText = country + "" + generatePassword(3);
             document.getElementById('password3').innerText = country + "" + generatePassword(4);
             document.getElementById('password4').innerText = generatePassword(12);
@@ -226,6 +227,10 @@ const countries = [
             <button class="copy-btn" onclick="copiarParrafo()">Copiar</button>
         </p>
         <hr>
+	    <div class="password-container">
+            <h3 id="password00"></h3>
+            <button class="copy-btn" onclick="copiarAlPortapapeles('password00')">Copiar</button>
+        </div>
          <div class="password-container">
             <h3 id="password0"></h3>
             <button class="copy-btn" onclick="copiarAlPortapapeles('password0')">Copiar</button>
